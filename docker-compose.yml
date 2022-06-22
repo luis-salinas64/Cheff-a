@@ -59,4 +59,4 @@ services:
     # Control de consola:
     stdin_open: true
     tty: true
-    #command: python3 cheff/manage.py runserver 0.0.0.0:8000  
+    command: python3 cheff_a/manage.py runserver 0.0.0.0:8000  
