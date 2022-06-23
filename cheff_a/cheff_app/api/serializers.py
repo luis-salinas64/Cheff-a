@@ -56,7 +56,7 @@ class ProductoTerminadoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ProductoTerminado
-        fields = ('codigo','categoria','nombre','precio_costo','precio_venta'
+        fields = ('codigo','categoria','nombre','precio_costo','precio_venta',
                 'un_medida','medida_producto','cantidad','stock','desperdicio')
 
 class ProductoElaboradoSerializer(serializers.ModelSerializer):
@@ -67,38 +67,69 @@ class ProductoElaboradoSerializer(serializers.ModelSerializer):
     ingrediente_base = serializers.PrimaryKeyRelatedField(write_only=True,
                 queryset=Ingredientes.objects.all())
 
+    un_medida = serializers.PrimaryKeyRelatedField(write_only=True,
+                queryset=UnMedida.objects.all())
+
     ingrediente_2 = serializers.PrimaryKeyRelatedField(write_only=True,
                 queryset=Ingredientes.objects.all())
+
+    un_medida_2 = serializers.PrimaryKeyRelatedField(write_only=True,
+                queryset=UnMedida.objects.all())
 
     ingrediente_3 = serializers.PrimaryKeyRelatedField(write_only=True,
                 queryset=Ingredientes.objects.all())
 
+    un_medida_3 = serializers.PrimaryKeyRelatedField(write_only=True,
+                queryset=UnMedida.objects.all())
+
     ingrediente_4 = serializers.PrimaryKeyRelatedField(write_only=True,
                 queryset=Ingredientes.objects.all())
+
+    un_medida_4 = serializers.PrimaryKeyRelatedField(write_only=True,
+                queryset=UnMedida.objects.all())
 
     ingrediente_5 = serializers.PrimaryKeyRelatedField(write_only=True,
                 queryset=Ingredientes.objects.all())
 
+    un_medida_5 = serializers.PrimaryKeyRelatedField(write_only=True,
+                queryset=UnMedida.objects.all())
+
     ingrediente_6 = serializers.PrimaryKeyRelatedField(write_only=True,
                 queryset=Ingredientes.objects.all())
 
+    un_medida_6 = serializers.PrimaryKeyRelatedField(write_only=True,
+                queryset=UnMedida.objects.all())
+
     ingrediente_7 = serializers.PrimaryKeyRelatedField(write_only=True,
                 queryset=Ingredientes.objects.all())
+
+    un_medida_7 = serializers.PrimaryKeyRelatedField(write_only=True,
+                queryset=UnMedida.objects.all())
         
     ingrediente_8 = serializers.PrimaryKeyRelatedField(write_only=True,
                 queryset=Ingredientes.objects.all())
 
+    un_medida_8 = serializers.PrimaryKeyRelatedField(write_only=True,
+                queryset=UnMedida.objects.all())
+
     ingrediente_9 = serializers.PrimaryKeyRelatedField(write_only=True,
                 queryset=Ingredientes.objects.all())
+
+    un_medida_9 = serializers.PrimaryKeyRelatedField(write_only=True,
+                queryset=UnMedida.objects.all())
 
     ingrediente_10 = serializers.PrimaryKeyRelatedField(write_only=True,
                 queryset=Ingredientes.objects.all())
 
+    un_medida_10 = serializers.PrimaryKeyRelatedField(write_only=True,
+                queryset=UnMedida.objects.all())
+
     class Meta:
         model = ProductoElaborado
-        fields = ('codigo','categoria','nombre','descripcion','imagen','ingrediente_base','ingrediente_2',
-                'ingrediente_3','ingrediente_4','ingrediente_5','ingrediente_6','ingrediente_7',
-                'ingrediente_8','ingrediente_9','ingrediente_10','porcentual_desperdicio')
+        fields =('__all__') 
+        #('codigo','categoria','nombre','descripcion','imagen','ingrediente_base','ingrediente_2',
+        #        'ingrediente_3','ingrediente_4','ingrediente_5','ingrediente_6','ingrediente_7',
+        #        'ingrediente_8','ingrediente_9','ingrediente_10','porcentual_desperdicio')
 
 class Moza_oSerializer(serializers.ModelSerializer):
 

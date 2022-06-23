@@ -9,6 +9,7 @@ from rest_framework.schemas import get_schema_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('cheff-app/', include('cheff_app.api.urls')),
+    path('cheff-app/', include('cheff_app.urls')),
 
     path('api-docs/', TemplateView.as_view(
         template_name='swagger-ui.html',

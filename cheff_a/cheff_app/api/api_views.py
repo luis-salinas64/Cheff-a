@@ -105,7 +105,7 @@ class PostPtAPIView(CreateAPIView):
     serializer_class = ProductoTerminadoSerializer
     permission_classes = [IsAuthenticated, IsAdminUser]
 
-class ListCreateComicAPIView(ListCreateAPIView):
+class ListCreatePtAPIView(ListCreateAPIView):
     __doc__ = f'''{''}
     `[METODO GET-POST]`
     Esta vista de API nos devuelve una lista de todos los comics presentes 
@@ -116,7 +116,7 @@ class ListCreateComicAPIView(ListCreateAPIView):
     serializer_class = ProductoTerminadoSerializer
     permission_classes = [IsAuthenticated, IsAdminUser]
 
-class RetrieveUpdateComicAPIView(RetrieveUpdateAPIView):
+class RetrieveUpdatePtAPIView(RetrieveUpdateAPIView):
     __doc__ = f'''{''}
     `[METODO GET-PUT-PATCH]`
     Esta vista de API nos permite actualizar un registro, o simplemente visualizarlo.
@@ -126,7 +126,7 @@ class RetrieveUpdateComicAPIView(RetrieveUpdateAPIView):
     permission_classes = [IsAuthenticated, IsAdminUser]
 
 
-class DestroyComicAPIView(DestroyAPIView):
+class DestroyPtAPIView(DestroyAPIView):
     __doc__ = f'''{''}
     `[METODO DELETE]`
     Esta vista de API nos devuelve una lista de todos los comics presentes 
@@ -154,7 +154,7 @@ class GetOnePtAPIView(ListAPIView):
         el Pt del ID solicitado.  
         '''
         try:
-            pt_id = self.kwargs['pt_id']
+            pt_id = self.kwargs['id']
             queryset = ProductoTerminado.objects.filter(id=pt_id)
             return queryset
         except Exception as error:

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+{% block title %}MENU ADMINISTRADOR{% endblock title %}
+
+{% block content %}
+{% load static %}
+
+<div class = "titulo">
+    <center><h2> Menu Administrador </h2></center>
+</div>
+<br>
+<div class=grid-admin>
+    <ul class="opcion">
+        
+            <li><a href = "/cheff-app/listado_pe">Listado de Productos Elaborados</a></li>
+            <br>
+            <li><a href = "/cheff-app/listado_mesa">Listado de Mesas</a></li>
+            <br>
+            <li><a href = "/cheff-app/listado_proveedor">Listado de Proveedores</a></li>
+            <br>
+    </ul>
+
+</div>
+
+
+
+
+{% endblock %}

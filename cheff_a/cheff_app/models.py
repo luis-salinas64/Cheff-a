@@ -152,27 +152,47 @@ class ProductoElaborado(models.Model):
 
     imagen = models.ImageField(verbose_name='imagen', upload_to='productos/', null = True, default='')
 
-    ingrediente_base = models.ForeignKey(ProductoTerminado, on_delete=CASCADE)
+    ingrediente_base = models.ForeignKey(Ingredientes, on_delete=CASCADE)
+    un_medida_base = models.ForeignKey(UnMedida, on_delete=CASCADE, default='')
+    cant_ing_base = models.DecimalField(verbose_name='cant_ing_base',max_digits=10, decimal_places=2, default=0)
 
-    ingrediente_2 = models.ForeignKey(ProductoTerminado, on_delete=CASCADE, related_name='ingrediente_2')
+    ingrediente_2 = models.ForeignKey(Ingredientes, on_delete=CASCADE, null=True, blank=True, related_name='ingrediente_2')
+    un_medida_2 = models.ForeignKey(UnMedida, on_delete=CASCADE, related_name='un_medida_2',default='')
+    cant_ing_2 = models.DecimalField(verbose_name='cant_ing_2',max_digits=10, decimal_places=2, default=0)
 
-    ingrediente_3 = models.ForeignKey(ProductoTerminado, on_delete=CASCADE, related_name='ingrediente_3')
+    ingrediente_3 = models.ForeignKey(Ingredientes, on_delete=CASCADE, related_name='ingrediente_3',null=True, blank=True)
+    un_medida_3 = models.ForeignKey(UnMedida, on_delete=CASCADE, related_name='un_medida_3',default='')
+    cant_ing_3 = models.DecimalField(verbose_name='cant_ing_3',max_digits=10, decimal_places=2, default=0)
 
-    ingrediente_4 = models.ForeignKey(ProductoTerminado, on_delete=CASCADE, related_name='ingrediente_4')
+    ingrediente_4 = models.ForeignKey(Ingredientes, on_delete=CASCADE, related_name='ingrediente_4',null=True, blank=True)
+    un_medida_4 = models.ForeignKey(UnMedida, on_delete=CASCADE, related_name='un_medida_4',default='')
+    cant_ing_4 = models.DecimalField(verbose_name='cant_ing_4',max_digits=10, decimal_places=2, default=0)
 
-    ingrediente_5 = models.ForeignKey(ProductoTerminado, on_delete=CASCADE, related_name='ingrediente_5')
+    ingrediente_5 = models.ForeignKey(Ingredientes, on_delete=CASCADE, related_name='ingrediente_5',null=True, blank=True)
+    un_medida_5 = models.ForeignKey(UnMedida, on_delete=CASCADE, related_name='un_medida_5',default=0)
+    cant_ing_5 = models.DecimalField(verbose_name='cant_ing_5',max_digits=10, decimal_places=2, default=0)
 
-    ingrediente_6 = models.ForeignKey(ProductoTerminado, on_delete=CASCADE, related_name='ingrediente_6')
+    ingrediente_6 = models.ForeignKey(Ingredientes, on_delete=CASCADE, related_name='ingrediente_6',null=True, blank=True)
+    un_medida_6 = models.ForeignKey(UnMedida, on_delete=CASCADE, related_name='un_medida_6',default=0)
+    cant_ing_6 = models.DecimalField(verbose_name='cant_ing_6',max_digits=10, decimal_places=2, default=0)
 
-    ingrediente_7 = models.ForeignKey(ProductoTerminado, on_delete=CASCADE, related_name='ingrediente_7')
+    ingrediente_7 = models.ForeignKey(Ingredientes, on_delete=CASCADE, related_name='ingrediente_7',null=True, blank=True)
+    un_medida_7 = models.ForeignKey(UnMedida, on_delete=CASCADE, related_name='un_medida_7',default=0)
+    cant_ing_7 = models.DecimalField(verbose_name='cant_ing_7',max_digits=10, decimal_places=2, default=0)
 
-    ingrediente_8 = models.ForeignKey(ProductoTerminado, on_delete=CASCADE, related_name='ingrediente_8')
+    ingrediente_8 = models.ForeignKey(Ingredientes, on_delete=CASCADE, related_name='ingrediente_8',null=True, blank=True)
+    un_medida_8 = models.ForeignKey(UnMedida, on_delete=CASCADE, related_name='un_medida_8',default=0)
+    cant_ing_8 = models.DecimalField(verbose_name='cant_ing_8',max_digits=10, decimal_places=2, default=0)
 
-    ingrediente_9 = models.ForeignKey(ProductoTerminado, on_delete=CASCADE, related_name='ingrediente_9')
+    ingrediente_9 = models.ForeignKey(Ingredientes, on_delete=CASCADE, related_name='ingrediente_9',null=True, blank=True)
+    un_medida_9 = models.ForeignKey(UnMedida, on_delete=CASCADE, related_name='un_medida_9',default=0)
+    cant_ing_9 = models.DecimalField(verbose_name='cant_ing_9',max_digits=10, decimal_places=2, default=0)
 
-    ingrediente_10 = models.ForeignKey(ProductoTerminado, on_delete=CASCADE, related_name='ingrediente_10')
+    ingrediente_10 = models.ForeignKey(Ingredientes, on_delete=CASCADE, related_name='ingrediente_10',null=True, blank=True)
+    un_medida_10 = models.ForeignKey(UnMedida, on_delete=CASCADE, related_name='un_medida_10',default='')
+    cant_ing_10 = models.DecimalField(verbose_name='cant_ing_10',max_digits=10, decimal_places=2, default=0)
 
-    porcentual_desperdicio = models.DecimalField(verbose_name='desperdicio',max_digits=10, decimal_places=2)
+    porcentual_desperdicio = models.DecimalField(verbose_name='desperdicio',max_digits=10, decimal_places=2,null=True, blank=True)
 
 
     class Meta:
@@ -216,8 +236,8 @@ class Mesa(models.Model):
     class Meta:
         db_table = 'mesa'           
 
-    def __str__(self):
-        return self.numero
+    # def __str__(self):
+    #     return self.numero
 
 
 

@@ -28,7 +28,7 @@ class Ingredientes(admin.ModelAdmin):
 
 @admin.register(ProductoTerminado)
 class ProductoTerminado(admin.ModelAdmin):
-    list_display = ('codigo','categoria','nombre')
+    list_display = ('id','codigo','categoria','nombre')
 
      # NOTE: Filtro lateral de elementos:
     list_filter= ('nombre','categoria')
@@ -38,7 +38,7 @@ class ProductoTerminado(admin.ModelAdmin):
 
 @admin.register(ProductoElaborado)
 class ProductoElaborado(admin.ModelAdmin):
-    list_display = ('codigo','categoria','nombre')
+    list_display = ('codigo','categoria','nombre','imagen')
 
      # NOTE: Filtro lateral de elementos:
     list_filter= ('nombre','categoria')
@@ -59,7 +59,7 @@ class Insumos_Mesa(admin.ModelAdmin):
 
 @admin.register(Mesa)
 class Mesa(admin.ModelAdmin):
-    list_display = ('id','numero')
+    list_display = ('id','numero','descripcion')
 
 @admin.register(Moza_o)
 class Moza_o(admin.ModelAdmin):
