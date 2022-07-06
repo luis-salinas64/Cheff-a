@@ -3,7 +3,8 @@ from cheff_app.models import *
 
 @admin.register(Comprobante)
 class Comprobante(admin.ModelAdmin):
-    list_display = ('id','nombre')
+    
+    list_display = ('id','tipo')
 
 
 @admin.register(Proveedor)
@@ -23,12 +24,13 @@ class UnMedida(admin.ModelAdmin):
 
 @admin.register(Ingredientes)
 class Ingredientes(admin.ModelAdmin):
-    list_display = ('id','nombre','un_medida','medida_producto','precio','cantidad','stock')
+    list_display = ('id','codigo','nombre','un_medida','medida_producto','precio','cantidad','stock')
 
 
 @admin.register(ProductoTerminado)
 class ProductoTerminado(admin.ModelAdmin):
-    list_display = ('id','codigo','categoria','nombre')
+    
+    list_display = ('id','codigo','nombre')
 
      # NOTE: Filtro lateral de elementos:
     list_filter= ('nombre','categoria')
@@ -38,7 +40,7 @@ class ProductoTerminado(admin.ModelAdmin):
 
 @admin.register(ProductoElaborado)
 class ProductoElaborado(admin.ModelAdmin):
-    list_display = ('codigo','categoria','nombre','imagen')
+    list_display = ('id','codigo','categoria','nombre','imagen')
 
      # NOTE: Filtro lateral de elementos:
     list_filter= ('nombre','categoria')
@@ -59,11 +61,11 @@ class Insumos_Mesa(admin.ModelAdmin):
 
 @admin.register(Mesa)
 class Mesa(admin.ModelAdmin):
-    list_display = ('id','numero','descripcion')
+    list_display = ('id','numero','capacidad','descripcion')
 
 @admin.register(Moza_o)
 class Moza_o(admin.ModelAdmin):
-    list_display = ('id','nombre')
+    list_display = ('id','legajo','nombre','fecha_ingreso')
 
 @admin.register(Ticket)
 class Ticket(admin.ModelAdmin):

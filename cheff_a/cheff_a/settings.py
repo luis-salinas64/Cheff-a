@@ -131,7 +131,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'UTC'
 
@@ -149,7 +149,45 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = (str(BASE_DIR.joinpath('staticfiles')),)
 
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'static/images')
+MEDIA_URL= 'images/'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = '/cheff-app/index'
+LOGIN_URL = '/cheff-app/'
+
+LOGGING_DIR = f'{BASE_DIR}/cheff_a/logs/'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'generic': {
+            'format': '[%(asctime)s] |%(levelname)s| %(message)s',
+            'datefmt': "%d/%b/%Y %H:%M:%S",
+            'style': '%'
+        }
+    },
+    'handlers': {
+        'general': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(LOGGING_DIR, 'general-batch.log'),
+            'maxBytes': 1024*1024*15,  # 15MB
+            'backupCount': 10,
+            'formatter': 'generic',        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['general'],
+            'propagate': True,
+            'level': 'DEBUG',
+        }
+    }
+}
+

@@ -1,0 +1,55 @@
+{% extends "cheff_app/admin.html" %}
+{% block title %}
+
+
+Listados    
+
+{% endblock title %}
+
+{% block content %}
+{% load static %}
+<center><h2>Listado de Medidas</h2></center>
+<br>
+<div class="listas">
+<table>
+    <thead class=list-admin>
+        <tr>
+            
+            <td>Id|</td>
+            <td>Nombre|</td>
+                        
+        </tr>
+    </thead>
+
+    <tbody>
+        
+        {% if object_list %}
+        {% for unm in object_list %}
+        <tr>
+            
+            <td>{{unm.id}}</td>
+            <td>{{unm.nombre}}</td>
+                       
+            <td><a class="btn btn-info" href="{% url 'edit_unm' unm.id %}"  >Editar</a></td>
+            <td><a class="btn btn-danger" href="{% url 'delete_unm' unm.id %}" >Eliminar</a></td>
+                
+        </tr>
+        {% endfor %}
+
+        {% else %}
+    
+        <center><h1>No existen Medidas</h1></center>
+
+        {% endif %}
+    </tbody>
+
+
+</table>
+</div>
+<br>
+<div class="volver">
+<a href="{% url 'admin'%}" style=><center>Volver</center></a>
+</div>
+
+
+{% endblock content %}

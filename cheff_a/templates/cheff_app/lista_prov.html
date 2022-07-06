@@ -1,0 +1,62 @@
+{% extends "cheff_app/admin.html" %}
+{% block title %}
+
+
+Listados    
+
+{% endblock title %}
+
+{% block content %}
+{% load static %}
+<center><h2>Listado de Proveedores</h2></center>
+<br>
+<div class="listas">
+<table>
+    <thead class=list-admin>
+        <tr>
+            
+            <td>Codigo|</td>
+            <td>Nombre|</td>
+            <td>CUIT|</td>
+            <td>Contacto|</td>
+            
+            
+        </tr>
+    </thead>
+
+    <tbody>
+        
+        {% if object_list %}
+        {% for prov in object_list %}
+        <tr>
+            
+            <td>{{prov.codigo}}</td>
+            <td>{{prov.nombre}}</td>
+            <td>{{prov.cuit}}</td>
+            <td>{{prov.contacto}}</td>
+            
+            
+            
+            <td><a class="btn btn-info" href="{% url 'edit_prov' prov.codigo %}"  >Editar</a></td>
+            <td><a class="btn btn-danger" href="{% url 'delete_prov' prov.codigo %}" >Eliminar</a></td>
+                
+        </tr>
+        {% endfor %}
+
+        {% else %}
+    
+        <center><h1>No existen Proveedores</h1></center>
+
+        {% endif %}
+    </tbody>
+
+
+</table>
+</div>
+<br>
+<div class="volver">
+<a href="{% url 'admin'%}" style=><center>Volver</center></a>
+</div>
+
+
+{% endblock content %}

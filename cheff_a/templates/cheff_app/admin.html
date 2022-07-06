@@ -1,6 +1,6 @@
-<!DOCTYPE html>
 
-{% block title %}MENU ADMINISTRADOR{% endblock title %}
+{% extends "cheff_app/base.html" %}
+{% block title %}ADMIN{% endblock title %}
 
 {% block content %}
 {% load static %}
@@ -9,20 +9,36 @@
     <center><h2> Menu Administrador </h2></center>
 </div>
 <br>
-<div class=grid-admin>
-    <ul class="opcion">
-        
-            <li><a href = "/cheff-app/listado_pe">Listado de Productos Elaborados</a></li>
-            <br>
-            <li><a href = "/cheff-app/listado_mesa">Listado de Mesas</a></li>
-            <br>
-            <li><a href = "/cheff-app/listado_proveedor">Listado de Proveedores</a></li>
-            <br>
-    </ul>
 
-</div>
+    <div class="grid-admin">
 
+        <ul class = "opcion">
+            
+            <li><a href = "/cheff-app/carga_form_me">Ingreso Mesas</a></li><br>            
+            <li><a href = "/cheff-app/carga_form_cat">Ingreso Categorias</a></li><br>            
+            <li><a href = "/cheff-app/carga_form_moz">Ingreso Moza/o</a></li><br>
+            <li><a href = "/cheff-app/carga_form_pe">Ingreso Producto Elaborados</a></li><br>            
+            <li><a href = "/cheff-app/carga_form_pt">Ingreso Producto Terminado</a></li><br>
+            <li><a href = "/cheff-app/carga_form_ing">Ingreso Ingredientes</a></li><br>
+            <li><a href = "/cheff-app/carga_form_prov">Ingreso Proveedores</a></li><br>
+            <li><a href = "/cheff-app/carga_form_unm">Ingreso Medidas</a></li><br>
+            <li><a href = "/cheff-app/carga_form_cpte">Ingreso Comprobantes</a></li><br>
+                  
+        </ul>
 
-
+        <ul class = "opcion">
+            <li><a href = "/cheff-app/lista_me">Listado de Mesas</a></li><br> 
+            <li><a href = "/cheff-app/lista_cat">Listado de Categorias</a></li><br>
+            <li><a href = "/cheff-app/lista_moz">Listado de Mozas/os</a></li><br>          
+            <li><a href = "/cheff-app/lista_pe">Listado de Productos Elaborados</a></li><br> 
+            <li><a href = "/cheff-app/lista_pt">Listado de Productos Terminados</a></li><br>
+            <li><a href = "/cheff-app/lista_ing">Listado de Ingredientes</a></li><br>         
+            <li><a href = "/cheff-app/lista_prov">Listado de Proveedores</a></li><br>
+            <li><a href = "/cheff-app/lista_unm">Listado de Medidas</a></li><br>
+            <li><a href = "/cheff-app/lista_cpte">Listado de Comprobantes</a></li><br>
+            
+            
+        </ul>
+    </div>
 
 {% endblock %}

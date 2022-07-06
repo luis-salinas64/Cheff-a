@@ -1,5 +1,8 @@
 from email.policy import default
+from tabnanny import verbose
 from unittest.util import _MAX_LENGTH
+
+
 from django.db import models
 from django.db.models.deletion import CASCADE
 import datetime
@@ -9,21 +12,25 @@ class Comprobante(models.Model):
 
     id = models.AutoField(db_column='ID', primary_key=True)
 
-    nombre = models.CharField(verbose_name = 'cptes', unique = True, max_length=20, default = 'cpte')
-    
+    tipo = models.CharField(verbose_name = 'tipo', unique = True, max_length=20, default = '')
+
     class Meta:
         db_table = 'comprobante'
 
     def __str__(self):
-        return self.nombre
+        return self.tipo
 
 class Proveedor(models.Model):
 
     id = models.AutoField(db_column='ID',primary_key=True)
 
+    codigo = models.PositiveIntegerField(verbose_name='codigo',unique=True, default=0)
+
     nombre = models.CharField(verbose_name = 'proveedor',max_length=50)
 
     cuit = models.CharField(verbose_name = 'cuit',max_length=50, default = '')
+
+    direccion = models.CharField(verbose_name = 'direccion',max_length=50, default = '')
 
     debe = models.DecimalField(verbose_name='debe',max_digits=10, decimal_places=2, default=0)
 
@@ -37,11 +44,13 @@ class Proveedor(models.Model):
         db_table = 'proveedor'
 
     def __str__(self):
-        return self.nombre
+        return self.codigo,self.nombre
 
 class Categoria(models.Model):
 
     id = models.AutoField(db_column='ID',primary_key=True)
+
+    codigo = models.PositiveIntegerField(verbose_name='codigo',unique=True,default=0)
 
     nombre = models.CharField(max_length=100)
 
@@ -49,7 +58,7 @@ class Categoria(models.Model):
         db_table = 'categoria'
 
     def __str__(self):
-        return self.nombre
+        return self.codigo,self.nombre
 
 class UnMedida(models.Model):
 
@@ -66,6 +75,8 @@ class UnMedida(models.Model):
 class Ingredientes(models.Model):
 
     id = models.AutoField(db_column='ID',primary_key=True)
+
+    codigo = models.PositiveIntegerField(verbose_name='codigo',unique=True,default=0)
 
     nombre = models.CharField(max_length=100)
 
@@ -114,7 +125,7 @@ class ProductoTerminado(models.Model):
 
     codigo = models.PositiveIntegerField(verbose_name='codigo',unique=True, default = 0)
 
-    categoria = models.ForeignKey(Categoria, on_delete=CASCADE)
+    categoria = models.ForeignKey(Categoria, on_delete=CASCADE,default='')
 
     nombre = models.CharField(verbose_name='nombre', max_length=80, default='')
 
@@ -136,15 +147,15 @@ class ProductoTerminado(models.Model):
         db_table = 'producto_terminado'
 
     def __str__(self):
-        return self.nombre
+        return self.codigo,self.nombre
 
 class ProductoElaborado(models.Model):
 
-    id = models.AutoField(db_column='ID',primary_key=True)    
+    id = models.AutoField(db_column='ID',primary_key=True)
 
     codigo = models.PositiveIntegerField(verbose_name='codigo',unique=True)
 
-    categoria = models.ForeignKey(Categoria, on_delete=CASCADE)
+    categoria = models.ForeignKey(Categoria,on_delete=CASCADE,default='')
 
     nombre = models.CharField(verbose_name='nombre', max_length=80, default='')
 
@@ -157,7 +168,7 @@ class ProductoElaborado(models.Model):
     cant_ing_base = models.DecimalField(verbose_name='cant_ing_base',max_digits=10, decimal_places=2, default=0)
 
     ingrediente_2 = models.ForeignKey(Ingredientes, on_delete=CASCADE, null=True, blank=True, related_name='ingrediente_2')
-    un_medida_2 = models.ForeignKey(UnMedida, on_delete=CASCADE, related_name='un_medida_2',default='')
+    un_medida_2 = models.ForeignKey(UnMedida, on_delete=CASCADE, related_name='un_medida_2',null=True, blank=True)
     cant_ing_2 = models.DecimalField(verbose_name='cant_ing_2',max_digits=10, decimal_places=2, default=0)
 
     ingrediente_3 = models.ForeignKey(Ingredientes, on_delete=CASCADE, related_name='ingrediente_3',null=True, blank=True)
@@ -192,6 +203,10 @@ class ProductoElaborado(models.Model):
     un_medida_10 = models.ForeignKey(UnMedida, on_delete=CASCADE, related_name='un_medida_10',default='')
     cant_ing_10 = models.DecimalField(verbose_name='cant_ing_10',max_digits=10, decimal_places=2, default=0)
 
+    costo_ingred = models.DecimalField(verbose_name='costo_ingred',max_digits=10, decimal_places=2, default=0)
+    costo_adic = models.DecimalField(verbose_name='costo_adic',max_digits=10, decimal_places=2, default=0)
+    costo_total = models.DecimalField(verbose_name='costo_total',max_digits=10, decimal_places=2, default=0)
+
     porcentual_desperdicio = models.DecimalField(verbose_name='desperdicio',max_digits=10, decimal_places=2,null=True, blank=True)
 
 
@@ -204,6 +219,8 @@ class ProductoElaborado(models.Model):
 class Moza_o(models.Model):
 
     id = models.AutoField(db_column='ID',primary_key=True)
+
+    legajo = models.PositiveIntegerField(verbose_name='legajo', unique=True,default=0)
 
     nombre = models.CharField(verbose_name='nombre', max_length=80, default='')
 
@@ -218,8 +235,8 @@ class Moza_o(models.Model):
     class Meta:
         db_table = 'moza_o'
 
-    def __str__(self):
-        return self.nombre
+    # def __str__(self):
+    #     return self.nombre
 
 
 
@@ -229,12 +246,14 @@ class Mesa(models.Model):
 
     numero = models.PositiveIntegerField(verbose_name='numero',unique=True)
 
-    cant_comensales = models.DecimalField(verbose_name='cant_comensales', max_digits=10,decimal_places=0,default=0)
+    capacidad = models.DecimalField(verbose_name='capacidad', max_digits=10,decimal_places=0,default=0)
 
     descripcion = models.CharField(verbose_name='descripcion',max_length=60,default='')
 
+    estado = models.BooleanField(verbose_name='estado',default=False)
+
     class Meta:
-        db_table = 'mesa'           
+        db_table = 'mesa'
 
     # def __str__(self):
     #     return self.numero
@@ -280,7 +299,7 @@ class Operacion(models.Model):
 
 class Ticket(models.Model):
 
-    id = models.AutoField(db_column='ID',primary_key=True)  
+    id = models.AutoField(db_column='ID',primary_key=True)
 
     fecha = models.DateField(verbose_name='fecha',default=datetime.date.today)
 

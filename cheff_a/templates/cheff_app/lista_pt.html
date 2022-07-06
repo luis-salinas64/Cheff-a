@@ -1,0 +1,68 @@
+{% extends "cheff_app/admin.html" %}
+{% block title %}
+
+
+Listados    
+
+{% endblock title %}
+
+{% block content %}
+{% load static %}
+<center><h2>Listado de Producto Terminado</h2></center>
+<br>
+<div class="listas">
+<table>
+    <thead class=list-admin>
+        <tr>
+            
+            <td>Codigo|</td>
+            <td>Nombre|</td>
+            <td>Pcio.Costo|</td>
+            <td>Pcio.Venta|</td>
+            <td>Un Medida|</td>
+            <td>Medida Prod|</td>
+            <td>Cant|</td>
+            <td>Stock|</td>
+            
+        </tr>
+    </thead>
+
+    <tbody>
+        
+        {% if object_list %}
+        {% for pt in object_list %}
+        <tr>
+            
+            <td>{{pt.codigo}}</td>
+            <td>{{pt.nombre}}</td>
+            <td>{{pt.precio_costo}}</td>
+            <td>{{pt.precio_venta}}</td>
+            <td>{{pt.un_medida}}</td>
+            <td>{{pt.medida_producto}}</td>
+            <td>{{pt_cantidad}}</td>
+            <td>{{pt.stock}}</td>
+            
+            
+            <td><a class="btn btn-info" href="{% url 'edit_pt' pt.codigo %}"  >Editar</a></td>
+            <td><a class="btn btn-danger" href="{% url 'delete_pt' pt.codigo %}" >Eliminar</a></td>
+                
+        </tr>
+        {% endfor %}
+
+        {% else %}
+    
+        <center><h1>No existen productos para esta consulta</h1></center>
+
+        {% endif %}
+    </tbody>
+
+
+</table>
+</div>
+<br>
+<div class="volver">
+<a href="{% url 'admin'%}" style=><center>Volver</center></a>
+</div>
+
+
+{% endblock content %}
