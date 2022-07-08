@@ -141,7 +141,7 @@ class DestroyPtAPIView(DestroyAPIView):
 class GetOnePtAPIView(ListAPIView):
     __doc__ = f'''{''}
     `[METODO GET]`
-    Esta vista de API nos devuelve un comic en particular de la base de datos.
+    Esta vista de API nos devuelve un producto en particular de la base de datos.
     '''
     serializer_class = ProductoTerminadoSerializer
     permission_classes = [IsAuthenticated, IsAdminUser]

@@ -27,13 +27,8 @@ class IngredientesForm(forms.ModelForm):
 class ProveedorForm(forms.ModelForm):
     class Meta:
         model = Proveedor
-        fields = ('codigo','nombre','cuit','direccion','contacto')
+        fields = ('codigo','nombre','cuit','direccion','contacto','porc_iva')
         
-class TicketForm(forms.ModelForm):
-    class Meta:
-        model = Ticket
-        fields = ('__all__')
-
 class CategoriaForm(forms.ModelForm):
     class Meta:
         model = Categoria
@@ -52,4 +47,9 @@ class UnMedidaForm(forms.ModelForm):
 class CpteForm(forms.ModelForm):
     class Meta:
         model = Comprobante
+        fields = ('__all__')
+
+class CtaProvForm(forms.ModelForm):
+    class Meta:
+        model = CtaProv
         fields = ('__all__')

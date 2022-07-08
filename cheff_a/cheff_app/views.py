@@ -601,26 +601,27 @@ class OkCargaView(TemplateView):
 
 
 
-# Ticket
+# Registrar cuenta Proveedor:
 
-def register_tkt(request):
+def register_ctaprov(request):
     
+    form = None
+
     if request.method == 'POST':
-        
-        form = TicketForm(request.POST)
-        
+        form = CtaProvForm(request.POST)
+
         if form.is_valid():
             form.save()
             print("valido")
 
-            return redirect('/cheff-app/ok  ')
-
+            return redirect('/cheff-app/ok')
+    
     else:
         # Si el método no es de tipo POST, se crea un objeto de tipo formulario
         # Y luego se envía al contexto de renderización.
-        form = TicketForm()
+        form = CtaProvForm()
 
-    return render(request,'cheff_app/carga_ticket.html', {'form':form})
+    return render(request,'cheff_app/carga_ctaprov.html', {'form':form})
 
 # ------------------------------ listados ----------------------------------------
 
@@ -697,6 +698,14 @@ class ListaCpteView(ListView):
     template_name = 'cheff_app/lista_cpte.html'
     paginate_by = 10
 
+class ListaCtaProvView(ListView):
+    '''
+    Página de listado de Cuentas Proveedor.
+    '''
+    queryset = CtaProv.objects.all().order_by('proveedor')
+    template_name = 'cheff_app/lista_cta_prov.html'
+    paginate_by = 10
+
 class DetailView(TemplateView):
     template_name = 'cheff_app/detail.html'
 
@@ -706,6 +715,16 @@ class DetailView(TemplateView):
 
 
         return context
+
+
+
+
+
+
+
+
+
+
 
 
 

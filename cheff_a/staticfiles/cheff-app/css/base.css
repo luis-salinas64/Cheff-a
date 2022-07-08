@@ -18,7 +18,7 @@ body{
     color:rgb(59, 56, 56);
     padding: 1%;
     border-radius: 5px;
-    background-color: rgb(241, 241, 177); 
+    background-color: rgb(214, 248, 252); 
     text-align: left;
     font-size: 15px;
     
@@ -29,22 +29,13 @@ body{
     color:rgb(59, 56, 56);
     padding: 1%;
     border-radius: 5px;
-    background-color: rgb(28, 43, 215); 
+    background-color: rgb(174, 180, 250); 
     text-align: center;
     font-size: 25px;
+    text-decoration: none;
     
 
 }
-/*     
-    text-align: center;
-    padding: 1%;
-    border-radius: 5px;
-    background-color: rgb(177, 236, 241); 
-    text-align: left;
-    font-size: 15px;
-    
-} */
-
 
 #logo{
     font-family: Arial, Helvetica, sans-serif;
@@ -135,7 +126,7 @@ body{
     display:grid;
     padding: 25px ;/* Achica el contenedor */
     grid-gap:10px ;/* Separacion entre bloques*/
-    grid-template-columns: 30% 30% 30%;
+    grid-template-columns: 50% 50%;
     /* background-color: rgb(5, 78, 202); */
     margin:auto;
 
@@ -161,7 +152,7 @@ body{
 
 .volver {
     text-decoration: none;
-    font-size: 20px;
+    font-size: 15px;
     background-color: rgb(119, 248, 186);
 }
 
@@ -177,7 +168,7 @@ body{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
     color: #353535;
-    background-color: #ec90d2;
+    background-color: #97fca3;
     padding: 2%;
     list-style: none;
     
@@ -202,6 +193,11 @@ body{
     margin: auto;
     
 
+}
+
+.listas {
+    text-align: center;
+    color: rgb(4, 4, 161);
 }
 
 

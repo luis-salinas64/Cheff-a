@@ -9,7 +9,7 @@ class Comprobante(admin.ModelAdmin):
 
 @admin.register(Proveedor)
 class Proveedor(admin.ModelAdmin):
-    list_display = ('id','nombre','cuit','debe','haber','saldo','contacto')
+    list_display = ('id','nombre','cuit','contacto')
 
     
 @admin.register(Categoria)
@@ -49,12 +49,7 @@ class ProductoElaborado(admin.ModelAdmin):
     search_fields = ['nombre']
 
 
-@admin.register(Operacion)
-class Operacion(admin.ModelAdmin):
-    list_display = ('cpte_nro','fecha','producto_terminado','producto_elaborado','ingredientes','precio')
-
-
-@admin.register(Insumos_Mesa)
+@admin.register(Insumos)
 class Insumos_Mesa(admin.ModelAdmin):
     list_display = ('nombre','un_medida','precio','cantidad','stock')
 
@@ -67,6 +62,10 @@ class Mesa(admin.ModelAdmin):
 class Moza_o(admin.ModelAdmin):
     list_display = ('id','legajo','nombre','fecha_ingreso')
 
-@admin.register(Ticket)
-class Ticket(admin.ModelAdmin):
-    list_display = ('id','fecha','mesa','moza_o','codigo_pt','cant_pt','codigo_pe','cant_pe','insumo_mesa','importe')
+@admin.register(CtaProv)
+class CtaProv(admin.ModelAdmin):
+    
+    list_display = ('id','proveedor','fecha','importe_total')
+
+
+

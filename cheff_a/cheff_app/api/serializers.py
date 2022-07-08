@@ -37,13 +37,13 @@ class IngredientesSerializer(serializers.ModelSerializer):
         model = Ingredientes
         fields = ('nombre','precio','un_medida','medida_producto','cantidad','stock')
 
-class Insumos_MesaSerializer(serializers.ModelSerializer):
+class InsumosSerializer(serializers.ModelSerializer):
 
     un_medida = serializers.PrimaryKeyRelatedField(write_only=True,
                 queryset=UnMedida.objects.all())
 
     class meta:
-        model = Insumos_Mesa
+        model = Insumos
         fields = ('nombre','precio','un_medida','medida_producto','cantidad','stock')
 
 class ProductoTerminadoSerializer(serializers.ModelSerializer):
@@ -142,59 +142,5 @@ class MesaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mesa
         fields = ('__all__')
-
-class OperacionSerializer(serializers.ModelSerializer):
-
-    moza_o = serializers.PrimaryKeyRelatedField(write_only=True,
-                queryset=Moza_o.objects.all())
-
-    tipo = serializers.PrimaryKeyRelatedField(write_only=True,
-                queryset=Comprobante.objects.all())
-
-    proveedor = serializers.PrimaryKeyRelatedField(write_only=True,
-                queryset=Proveedor.objects.all())
-
-    categoria = serializers.PrimaryKeyRelatedField(write_only=True,
-                queryset=Categoria.objects.all())
-
-    producto_terminado = serializers.PrimaryKeyRelatedField(write_only=True,
-                queryset=ProductoTerminado.objects.all())
-
-    producto_elaborado = serializers.PrimaryKeyRelatedField(write_only=True,
-                queryset=ProductoElaborado.objects.all())
-
-    ingredientes = serializers.PrimaryKeyRelatedField(write_only=True,
-                queryset=Ingredientes.objects.all())
-
-    
-
-    class Meta:
-        model = Operacion
-        fields = ('cpte_nro','moza_o','fecha','tipo','proveedor','categoria','producto_terminado',
-                'producto_elaborado','ingredientes','precio','cantidad','importe')
-
-class TicketSerializer(serializers.ModelSerializer):
-
-    mesa = serializers.PrimaryKeyRelatedField(write_only=True,
-            queryset=Mesa.objects.all())
-
-    moza_o = serializers.PrimaryKeyRelatedField(write_only=True,
-                queryset=Moza_o.objects.all())
-
-    codigo_pt = serializers.PrimaryKeyRelatedField(write_only=True,
-                queryset=ProductoTerminado.objects.all())
-
-    codigo_pe = serializers.PrimaryKeyRelatedField(write_only=True,
-                queryset=ProductoElaborado.objects.all())
-
-    insumo_mesa = serializers.PrimaryKeyRelatedField(write_only=True,
-                queryset=Insumos_Mesa.objects.all())
-
-
-    class Meta:
-        model = Ticket
-        fields = ('fecha','mesa','moza_o','codigo_pt','cant_pt','codigo_pe','cant_pe',
-                'insumo_mesa','importe')
-
 
 

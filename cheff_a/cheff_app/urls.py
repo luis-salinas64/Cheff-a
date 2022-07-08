@@ -54,7 +54,7 @@ path('delete_pt/<int:codigo>',login_required(delete_pt), name='delete_pt'),
 
 path('carga_form_ing',login_required(register_ing), name='carga_form_ing'),
 path('edit_ing/<int:codigo>',login_required(edit_ing), name='edit_ing'),
-path('delete_ing/<int:codigo>',login_required(delete_ing), name='ing_delete'),
+path('delete_ing/<int:codigo>',login_required(delete_ing), name='delete_ing'),
 
 path('carga_form_prov',login_required(register_prov), name='carga_form_prov'),
 path('carga_form_prov/<int:codigo>',login_required(edit_prov), name='edit_prov'),
@@ -68,6 +68,9 @@ path('carga_form_cpte',login_required(register_cpte), name='carga_form_cpte'),
 path('carga_form_cpte/<int:id>',login_required(edit_cpte), name='edit_cpte'),
 path('delete_cpte/<int:id>',login_required(delete_cpte), name='delete_cpte'),
 
+path('carga_ctaprov',login_required(register_ctaprov), name='carga_ctaprov'),
+
+
 
 path('lista_pe',login_required(ListaPeView.as_view()), name='lista_pe'),
 path('lista_me',login_required(ListaMesaView.as_view()), name='lista_me'),
@@ -78,6 +81,7 @@ path('lista_moz',login_required(ListaMozView.as_view()), name='lista_moz'),
 path('lista_unm',login_required(ListaUnmView.as_view()), name='lista_unm'),
 path('lista_cpte',login_required(ListaCpteView.as_view()), name='lista_cpte'),
 path('lista_ing',login_required(ListaIngView.as_view()), name='lista_ing'),
+path('lista_ctaprov',login_required(ListaCtaProvView.as_view()), name='lista_ctaprov'),
 
 path('admin', login_required(AdminView.as_view()), name='admin'),
 
