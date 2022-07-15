@@ -41,20 +41,9 @@ path('carga_form_moz', login_required(register_moz), name='carga_form_moz'),
 path('edit_moz/<int:legajo>',login_required(edit_moz), name='edit_moz'),
 path('delete_moz/<int:legajo>',login_required(delete_moz), name='delete_moz'),
 
-
-
-path('carga_form_pe',login_required(register_pe), name='carga_form_pe'),
-path('edit_pe/<int:codigo>',login_required(edit_pe), name='edit_pe'),
-path('delete_pe/<int:codigo>',login_required(delete_pe), name='delete_pe'),
-
-path('carga_form_pt',login_required(register_pt), name='carga_form_pt'),
-path('edit_pt/<int:codigo>',login_required(edit_pt), name='edit_pt'),
-path('delete_pt/<int:codigo>',login_required(delete_pt), name='delete_pt'),
-
-
-path('carga_form_ing',login_required(register_ing), name='carga_form_ing'),
-path('edit_ing/<int:codigo>',login_required(edit_ing), name='edit_ing'),
-path('delete_ing/<int:codigo>',login_required(delete_ing), name='delete_ing'),
+path('carga_producto',login_required(register_producto), name='carga_producto'),
+path('edit_producto/<int:codigo>',login_required(edit_producto), name='edit_producto'),
+path('delete_producto/<int:codigo>',login_required(delete_producto), name='delete_producto'),
 
 path('carga_form_prov',login_required(register_prov), name='carga_form_prov'),
 path('carga_form_prov/<int:codigo>',login_required(edit_prov), name='edit_prov'),
@@ -71,16 +60,13 @@ path('delete_cpte/<int:id>',login_required(delete_cpte), name='delete_cpte'),
 path('carga_ctaprov',login_required(register_ctaprov), name='carga_ctaprov'),
 
 
-
-path('lista_pe',login_required(ListaPeView.as_view()), name='lista_pe'),
 path('lista_me',login_required(ListaMesaView.as_view()), name='lista_me'),
-path('lista_pt',login_required(ListaPtView.as_view()), name='lista_pt'),
+path('lista_producto',login_required(ListaProductoView.as_view()), name='lista_producto'),
 path('lista_cat',login_required(ListaCatView.as_view()), name='lista_cat'),
 path('lista_prov',login_required(ListaProvView.as_view()), name='lista_prov'),
 path('lista_moz',login_required(ListaMozView.as_view()), name='lista_moz'),
 path('lista_unm',login_required(ListaUnmView.as_view()), name='lista_unm'),
 path('lista_cpte',login_required(ListaCpteView.as_view()), name='lista_cpte'),
-path('lista_ing',login_required(ListaIngView.as_view()), name='lista_ing'),
 path('lista_ctaprov',login_required(ListaCtaProvView.as_view()), name='lista_ctaprov'),
 
 path('admin', login_required(AdminView.as_view()), name='admin'),

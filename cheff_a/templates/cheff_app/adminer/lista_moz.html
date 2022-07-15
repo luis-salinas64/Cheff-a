@@ -1,0 +1,60 @@
+{% extends "cheff_app/admin.html" %}
+{% block title %}
+
+
+Listados    
+
+{% endblock title %}
+
+{% block content %}
+{% load static %}
+<center><h2>Listado de Moza/o</h2></center>
+<br>
+<div class="listas">
+<table>
+    <thead class=list-admin>
+        <tr>
+            
+            <td>Legajo|</td>
+            <td>Nombre|</td>
+            <td>Cuil|</td>
+            <td>Fº Ing</td>
+
+             
+        </tr>
+    </thead>
+
+    <tbody>
+        
+        {% if object_list %}
+        {% for moz in object_list %}
+        <tr>
+            
+            <td>{{moz.legajo}}</td>
+            <td>{{moz.nombre}}</td>
+            <td>{{moz.cuil}}</td>
+            <td>{{moz.fecha_ingreso}}</td>
+
+            <td><a class="btn btn-info" href="{% url 'edit_moz' moz.legajo %}"  >Editar</a></td>
+            <td><a class="btn btn-danger" href="{% url 'delete_moz' moz.legajo %}" >Eliminar</a></td>
+                
+        </tr>
+        {% endfor %}
+
+        {% else %}
+    
+        <center><h1>No hay mesas ingresadas</h1></center>
+
+        {% endif %}
+    </tbody>
+
+
+</table>
+</div>
+<br>
+<div class="volver">
+<a href="{% url 'admin'%}" style=><center>Volver</center></a>
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,61 @@
+{% extends "cheff_app/admin.html" %}
+{% block title %}
+
+
+Listados    
+
+{% endblock title %}
+
+{% block content %}
+{% load static %}
+<center><h2>Listado Cuenta Proveedor</h2></center>
+<br>
+<div class="listas">
+<table>
+    <thead class=list-admin>
+        <tr>
+            
+            <td>Proveedor|</td>
+            <td>Fecha|</td>
+            <td>Cpte Nº|</td>
+            <td>Tipo|</td>
+            <td>Importe|</td>
+            
+            
+            
+        </tr>
+    </thead>
+
+    <tbody>
+        
+        {% if object_list %}
+        {% for item in object_list %}
+        <tr>
+            
+            <td>{{item.proveedor}}</td>
+            <td>{{item.fecha}}</td>
+            <td>{{item.cpte_nro}}</td>
+            <td>{{item.tipo_cpte}}</td>
+            <td>{{item.importe_total}}</td>
+            
+                
+        </tr>
+        {% endfor %}
+
+        {% else %}
+    
+        <center><h1>No existen registros para este Proveedor</h1></center>
+
+        {% endif %}
+    </tbody>
+
+
+</table>
+</div>
+<br>
+<div class="volver">
+<a href="{% url 'admin'%}" style=><center>Volver</center></a>
+</div>
+
+
+{% endblock content %}

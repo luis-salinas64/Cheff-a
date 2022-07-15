@@ -1,0 +1,22 @@
+{% extends "cheff_app/admin.html" %}
+
+{% block title %}
+
+Eliminar Tipo de Comprobante
+
+{% endblock %}
+
+{% block content %}
+
+
+<form class="form " method="POST" enctype="multipart/form-data">{% csrf_token %}
+
+<h3> Desea eliminar comprobante {{cpte.id}}?</h3>
+
+<button class= "btn btn-danger" input type = "submit" >Eliminar</button>
+
+<a class= "btn btn-default" href="{% url 'lista_me'%}">Cancelar</a>
+
+
+</form>
+{% endblock content %}

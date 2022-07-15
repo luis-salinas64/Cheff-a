@@ -9,7 +9,7 @@ class Comprobante(admin.ModelAdmin):
 
 @admin.register(Proveedor)
 class Proveedor(admin.ModelAdmin):
-    list_display = ('id','nombre','cuit','contacto')
+    list_display = ('id','nombre','cuit','telefono')
 
     
 @admin.register(Categoria)
@@ -22,12 +22,7 @@ class UnMedida(admin.ModelAdmin):
     list_display = ('id','un_medida')
 
 
-@admin.register(Ingredientes)
-class Ingredientes(admin.ModelAdmin):
-    list_display = ('id','codigo','nombre','un_medida','medida_producto','precio','cantidad','stock')
-
-
-@admin.register(ProductoTerminado)
+@admin.register(Producto)
 class ProductoTerminado(admin.ModelAdmin):
     
     list_display = ('id','codigo','nombre')
@@ -37,22 +32,7 @@ class ProductoTerminado(admin.ModelAdmin):
     
     # NOTE: Buscador de elementos en la columna:
     search_fields = ['nombre']
-
-@admin.register(ProductoElaborado)
-class ProductoElaborado(admin.ModelAdmin):
-    list_display = ('id','codigo','categoria','nombre','imagen')
-
-     # NOTE: Filtro lateral de elementos:
-    list_filter= ('nombre','categoria')
     
-    # NOTE: Buscador de elementos en la columna:
-    search_fields = ['nombre']
-
-
-@admin.register(Insumos)
-class Insumos_Mesa(admin.ModelAdmin):
-    list_display = ('nombre','un_medida','precio','cantidad','stock')
-
 
 @admin.register(Mesa)
 class Mesa(admin.ModelAdmin):

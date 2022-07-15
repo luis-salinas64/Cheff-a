@@ -9,13 +9,13 @@ urlpatterns = [
     path('user/login/', LoginUserAPIView.as_view()),
 
     # CRUD APIs:
-    path('ptget/', GetPtAPIView.as_view()),
-    path('ptpost/', PostPtAPIView.as_view()),
-    path('ptinsert/', ListCreatePtAPIView.as_view()),
-    path('ptput/', RetrieveUpdatePtAPIView.as_view()),
-    path('ptdestroy/', DestroyPtAPIView.as_view()),
+    path('prod_get/', GetProductoAPIView.as_view()),
+    path('prod_post/', PostProductoAPIView.as_view()),
+    path('prod_insert/', ListCreateProductoAPIView.as_view()),
+    path('prod_put/', RetrieveUpdateProductoAPIView.as_view()),
+    path('prod_destroy/', DestroyProductoAPIView.as_view()),
 
 
-    path('ptget/<int:pk>/', GetOnePtAPIView.as_view()),
+    path('prod_one_get/<int:pk>/', GetOneProductoAPIView.as_view()),
     
 ]

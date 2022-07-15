@@ -8,26 +8,18 @@ class MesaForm(forms.ModelForm):
         model = Mesa
         fields = ('numero', 'capacidad','descripcion')
 
-class ProductoElaboradoForm(forms.ModelForm):
-    class Meta:
-        model = ProductoElaborado
-        fields = ('__all__')
         
-class ProductoTerminadoForm(forms.ModelForm):
+class ProductoForm(forms.ModelForm):
     
     class Meta:
-        model = ProductoTerminado
+        model = Producto
         fields = ('codigo','categoria','nombre','precio_costo','precio_venta','un_medida','medida_producto','cantidad')
 
-class IngredientesForm(forms.ModelForm):
-    class Meta:
-        model = Ingredientes
-        fields = ('codigo','nombre','precio','un_medida','medida_producto','cantidad')
 
 class ProveedorForm(forms.ModelForm):
     class Meta:
         model = Proveedor
-        fields = ('codigo','nombre','cuit','direccion','contacto','porc_iva')
+        fields = ('codigo','nombre','cuit','direccion','telefono','porc_iva')
         
 class CategoriaForm(forms.ModelForm):
     class Meta:

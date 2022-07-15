@@ -9,6 +9,7 @@ from django.db.models import Count
 # from django.db import filters
 from django.views.generic import TemplateView, ListView, CreateView,DeleteView,UpdateView
 import io
+from django.contrib import messages
 
 # Importamos los modelos que vamos a usar:
 from django.contrib.auth.models import User
@@ -126,14 +127,14 @@ def register_mesa(request):
         form = MesaForm(request.POST)
         if form.is_valid():
             form.save()
-            print('Mesa registrada')
+            
             return redirect('/cheff-app/ok')
     else:
         # Si el método no es de tipo POST, se crea un objeto de tipo formulario
         # Y luego se envía al contexto de renderización.
         form = MesaForm()
 
-    return render(request,'cheff_app/carga_form_me.html', {'form':form})
+    return render(request,'cheff_app/adminer/carga_form_me.html', {'form':form})
             
 
 # Editar Mesa:
@@ -151,10 +152,9 @@ def edit_me(request,numero):
 
         if form.is_valid():
             form.save()
-            print("valido")
 
             return redirect('/cheff-app/ok')
-    return render (request, 'cheff_app/carga_form_me.html', {'form':form})
+    return render (request, 'cheff_app/adminer/carga_form_me.html', {'form':form})
 
 # Eliminar Mesa
 
@@ -164,11 +164,10 @@ def delete_me(request,numero):
 
     if request.method == 'POST':
         mesa.delete()
-        print('Mesa eliminada')
 
-        return redirect('/cheff-app/ok')
+        return redirect('/cheff-app/lista_me')
 
-    return render(request, 'cheff_app/delete_me.html', {'mesa':mesa})
+    return render(request, 'cheff_app/adminer/delete_me.html', {'mesa':mesa})
 
 # Registrar nueva Categoria:
 
@@ -180,12 +179,12 @@ def register_cat(request):
         form = CategoriaForm(request.POST)
         if form.is_valid():
             form.save()
-            print('Categoria registrada')
+            
             return redirect('/cheff-app/ok')
     else:
         form = CategoriaForm()
 
-    return render(request,'cheff_app/carga_form_cat.html', {'form':form})
+    return render(request,'cheff_app/adminer/carga_form_cat.html', {'form':form})
 
 # Editar Categoria:
 
@@ -203,10 +202,10 @@ def edit_cat(request,codigo):
 
         if form.is_valid():
             form.save()
-            print("valido")
-
+            
             return redirect('/cheff-app/ok')
-    return render (request, 'cheff_app/carga_form_cat.html', {'form':form})
+
+    return render (request, 'cheff_app/adminer/carga_form_cat.html', {'form':form})
 
 # Eliminar Categoria:
 
@@ -218,9 +217,9 @@ def delete_cat(request,codigo):
         categoria.delete()
         print('Categoria eliminada')
 
-        return redirect('/cheff-app/ok')
+        return redirect('/cheff-app/lista_cat')
     
-    return render(request,'cheff_app/delete_cat.html', {'categoria':categoria})
+    return render(request,'cheff_app/adminer/delete_cat.html', {'categoria':categoria})
 
 
 def register_moz(request):
@@ -232,12 +231,12 @@ def register_moz(request):
         form = Moza_oForm(request.POST)
         if form.is_valid():
             form.save()
-            print('Mozo registrado')
+            
             return redirect('/cheff-app/ok')
     else:
         form = Moza_oForm()
 
-    return render(request,'cheff_app/carga_form_moz.html', {'form':form})
+    return render(request,'cheff_app/adminer/carga_form_moz.html', {'form':form})
 
 # Editar Moza_o:
 
@@ -255,10 +254,10 @@ def edit_moz(request,legajo):
 
         if form.is_valid():
             form.save()
-            print("valido")
+            
 
             return redirect('/cheff-app/ok')
-    return render (request, 'cheff_app/carga_form_moz.html', {'form':form})
+    return render (request, 'cheff_app/adminer/carga_form_moz.html', {'form':form})
 
 # Eliminar Moza_o:
 
@@ -268,23 +267,19 @@ def delete_moz(request,legajo):
 
     if request.method == 'POST':
         moz.delete()
-        print('Moza/o eliminada')
-
-        return redirect('/cheff-app/ok')
+        
+        return redirect('/cheff-app/lista_moz')
     
-    return render(request,'cheff_app/delete_moz.html', {'moz':moz})
+    return render(request,'cheff_app/adminer/delete_moz.html', {'moz':moz})
 
 
 
-
-# Registrar nuevo Producto Elaborado:
-def register_pe(request):
-
-    form = None
-
+# Registrar nuevo Producto :
+def register_producto(request):
+    
     if request.method == 'POST':
         
-        form = ProductoElaboradoForm(request.POST,request.FILES)
+        form = ProductoForm(request.POST)
         
         if form.is_valid():
             form.save()
@@ -295,143 +290,40 @@ def register_pe(request):
     else:
         # Si el método no es de tipo POST, se crea un objeto de tipo formulario
         # Y luego se envía al contexto de renderización.
-        form = ProductoElaboradoForm()
+        form = ProductoForm()
 
-    return render(request,'cheff_app/carga_form_pe.html', {'form':form})
+    return render(request,'cheff_app/adminer/carga_producto.html', {'form':form})
 
-# Editar Producto Elaborado:
-def edit_pe(request,codigo):
+# Editar Producto:
+def edit_producto(request,codigo):
     form = None
 
-    producto = ProductoElaborado.objects.get(codigo=codigo)
+    producto = Producto.objects.get(codigo=codigo)
 
     if request.method == 'GET':
-        form = ProductoElaboradoForm(instance=producto)
+        form = ProductoForm(instance=producto)
 
     else:
-        form = ProductoElaboradoForm(request.POST,instance=producto)
-
+        form = ProductoForm(request.POST,instance=producto)
 
         if form.is_valid():
             form.save()
-            print("valido")
 
             return redirect('/cheff-app/ok')
-    return render (request, 'cheff_app/carga_form_pe.html', {'form':form})
-# Borrar P.E.
 
-def delete_pe (request,codigo):
+    return render (request, 'cheff_app/adminer/carga_producto.html', {'form':form})
 
-    pe = ProductoElaborado.objects.get(codigo=codigo)
+# Borrar Producto
+
+def delete_producto (request,codigo):
+
+    pe = Producto.objects.get(codigo=codigo)
     if request.method=="POST":
 
         pe.delete()
-        return redirect('/cheff-app/lista_pe')
+        return redirect('/cheff-app/lista_producto')
 
-    return render(request,'cheff_app/delete_pe.html',{'pe':pe})
-
-# Registrar nuevo Producto Terminado:
-def register_pt(request):
-    
-    if request.method == 'POST':
-        
-        form = ProductoTerminadoForm(request.POST)
-        
-        if form.is_valid():
-            form.save()
-            print("valido")
-
-            return redirect('/cheff-app/ok')
-
-    else:
-        # Si el método no es de tipo POST, se crea un objeto de tipo formulario
-        # Y luego se envía al contexto de renderización.
-        form = ProductoTerminadoForm()
-
-    return render(request,'cheff_app/carga_form_pt.html', {'form':form})
-
-# Editar Producto Terminado:
-def edit_pt(request,codigo):
-    form = None
-
-    producto = ProductoTerminado.objects.get(codigo=codigo)
-
-    if request.method == 'GET':
-        form = ProductoTerminadoForm(instance=producto)
-
-    else:
-        form = ProductoTerminadoForm(request.POST,instance=producto)
-
-
-        if form.is_valid():
-            form.save()
-            print("valido")
-
-            return redirect('/cheff-app/ok')
-    return render (request, 'cheff_app/carga_form_pt.html', {'form':form})
-
-# Borrar Producto Terminado
-
-def delete_pt (request,codigo):
-
-    pe = ProductoTerminado.objects.get(codigo=codigo)
-    if request.method=="POST":
-
-        pe.delete()
-        return redirect('/cheff-app/lista_pt')
-
-    return render(request,'cheff_app/delete_pt.html',{'pe':pe})
-
-# Registrar nuevo Ingrediente:
-def register_ing(request):
-    
-    if request.method == 'POST':
-        
-        form = IngredientesForm(request.POST,request.FILES)
-        
-        if form.is_valid():
-            form.save()
-            print("valido")
-
-            return redirect('/cheff-app/ok')
-
-    else:
-        # Si el método no es de tipo POST, se crea un objeto de tipo formulario
-        # Y luego se envía al contexto de renderización.
-        form = IngredientesForm()
-
-    return render(request,'cheff_app/carga_form_ing.html', {'form':form})
-
-# Editar Ingredientes:
-def edit_ing(request,codigo):
-    form = None
-
-    producto = Ingredientes.objects.get(codigo=codigo)
-
-    if request.method == 'GET':
-        form = IngredientesForm(instance=producto)
-
-    else:
-        form = IngredientesForm(request.POST,instance=producto)
-
-
-        if form.is_valid():
-            form.save()
-            print("valido")
-
-            return redirect('/cheff-app/ok')
-    return render (request, 'cheff_app/carga_form_ing.html', {'form':form})
-
-# Borrar Ingredientes
-def delete_ing(request,codigo):
-
-    ing = Ingredientes.objects.get(codigo=codigo)
-    if request.method=="POST":
-
-        ing.delete()
-        return redirect('/cheff-app/lista_ing')
-
-    return render(request,'cheff_app/delete_ing.html',{'ing':ing})
+    return render(request,'cheff_app/adminer/delete_producto.html',{'pe':pe})
 
 # Registrar nuevo Proveedor:
 def register_prov(request):
@@ -451,7 +343,7 @@ def register_prov(request):
         # Y luego se envía al contexto de renderización.
         form = ProveedorForm()
 
-    return render(request,'cheff_app/carga_form_prov.html', {'form':form})
+    return render(request,'cheff_app/adminer/carga_form_prov.html', {'form':form})
 
 # Editar Proveedor:
 def edit_prov(request,codigo):
@@ -467,11 +359,11 @@ def edit_prov(request,codigo):
 
         if form.is_valid():
             form.save()
-            print("valido")
+            
 
             return redirect('/cheff-app/ok')
 
-    return render (request, 'cheff_app/carga_form_prov.html', {'form':form})
+    return render (request, 'cheff_app/adminer/carga_form_prov.html', {'form':form})
 
 # Borrar Proveedor:
 def delete_prov(request,codigo):
@@ -484,7 +376,7 @@ def delete_prov(request,codigo):
         
         return redirect('/cheff-app/lista_prov')
 
-    return render(request,'cheff_app/delete_prov.html',{'proveedor':proveedor})
+    return render(request,'cheff_app/adminer/delete_prov.html',{'proveedor':proveedor})
 
 # Registrar nueva Unidad de Medida:
 def register_unm(request):
@@ -495,16 +387,14 @@ def register_unm(request):
 
         if form.is_valid():
             form.save()
-            print("valido")
-
+            
             return redirect('/cheff-app/ok')
     
     else:
-        # Si el método no es de tipo POST, se crea un objeto de tipo formulario
-        # Y luego se envía al contexto de renderización.
+        
         form = UnMedidaForm()
 
-    return render(request,'cheff_app/carga_form_unm.html', {'form':form})
+    return render(request,'cheff_app/adminer/carga_form_unm.html', {'form':form})
 
 # Editar Unidad de Medida:
 def edit_unm(request,id):
@@ -520,11 +410,10 @@ def edit_unm(request,id):
 
         if form.is_valid():
             form.save()
-            print("valido")
-
+            
             return redirect('/cheff-app/ok')
 
-    return render (request, 'cheff_app/carga_form_unm.html', {'form':form})
+    return render (request, 'cheff_app/adminer/carga_form_unm.html', {'form':form})
 
 def delete_unm(request,id):
     form = None
@@ -537,7 +426,7 @@ def delete_unm(request,id):
         
         return redirect('/cheff-app/lista_unm')
 
-    return render(request,'cheff_app/delete_unm.html',{'unidad':unidad})
+    return render(request,'cheff_app/adminer/delete_unm.html',{'unidad':unidad})
 
 
 # Registrar nuevo Comprobante:
@@ -558,7 +447,7 @@ def register_cpte(request):
         # Y luego se envía al contexto de renderización.
         form = CpteForm()
 
-    return render(request,'cheff_app/carga_form_cpte.html', {'form':form})
+    return render(request,'cheff_app/adminer/carga_form_cpte.html', {'form':form})
 
 # Editar Comprobante:
 def edit_cpte(request,id):
@@ -574,11 +463,10 @@ def edit_cpte(request,id):
 
         if form.is_valid():
             form.save()
-            print("valido")
 
             return redirect('/cheff-app/ok')
 
-    return render (request, 'cheff_app/carga_form_cpte.html', {'form':form})
+    return render (request, 'cheff_app/adminer/carga_form_cpte.html', {'form':form})
 
 # Eliminar Comprobante:
 def delete_cpte(request,id):
@@ -592,7 +480,7 @@ def delete_cpte(request,id):
         
         return redirect('/cheff-app/lista_cpte')
 
-    return render(request,'cheff_app/delete_cpte.html',{'cpte':cpte})
+    return render(request,'cheff_app/adminer/delete_cpte.html',{'cpte':cpte})
 
 
 # Confirmacion de carga correcta
@@ -621,32 +509,16 @@ def register_ctaprov(request):
         # Y luego se envía al contexto de renderización.
         form = CtaProvForm()
 
-    return render(request,'cheff_app/carga_ctaprov.html', {'form':form})
+    return render(request,'cheff_app/adminer/carga_ctaprov.html', {'form':form})
 
 # ------------------------------ listados ----------------------------------------
 
-class ListaPeView(ListView):
+class ListaProductoView(ListView):
     '''
-    Página de listado de Productos Elaborados.
+    Página de listado de Productos.
     '''
-    queryset = ProductoElaborado.objects.all().order_by('id')
-    template_name = 'cheff_app/lista_pe.html'
-    paginate_by = 10
-
-class ListaPtView(ListView):
-    '''
-    Página de listado de Producto Terminado.
-    '''
-    queryset = ProductoTerminado.objects.all().order_by('id')
-    template_name = 'cheff_app/lista_pt.html'
-    paginate_by = 10
-
-class ListaIngView(ListView):
-    '''
-    Página de listado de Ingredientes.
-    '''
-    queryset = Ingredientes.objects.all().order_by('id')
-    template_name = 'cheff_app/lista_ing.html'
+    queryset = Producto.objects.all().order_by('id')
+    template_name = 'cheff_app/adminer/lista_producto.html'
     paginate_by = 10
 
 
@@ -655,7 +527,7 @@ class ListaMesaView(ListView):
     Página de listado de Mesas.
     '''
     queryset = Mesa.objects.all().order_by('id')
-    template_name = 'cheff_app/lista_me.html'
+    template_name = 'cheff_app/adminer/lista_me.html'
     paginate_by = 10
 
 class ListaCatView(ListView):
@@ -663,7 +535,7 @@ class ListaCatView(ListView):
     Página de listado de Categorias.
     '''
     queryset = Categoria.objects.all().order_by('id')
-    template_name = 'cheff_app/lista_cat.html'
+    template_name = 'cheff_app/adminer/lista_cat.html'
     paginate_by = 10
 
 class ListaProvView(ListView):
@@ -671,7 +543,7 @@ class ListaProvView(ListView):
     Página de listado de Proveedores.
     '''
     queryset = Proveedor.objects.all().order_by('id')
-    template_name = 'cheff_app/lista_prov.html'
+    template_name = 'cheff_app/adminer/lista_prov.html'
     paginate_by = 10
 
 class ListaMozView(ListView):
@@ -679,7 +551,7 @@ class ListaMozView(ListView):
     Página de listado de Mozos.
     '''
     queryset = Moza_o.objects.all().order_by('id')
-    template_name = 'cheff_app/lista_moz.html'
+    template_name = 'cheff_app/adminer/lista_moz.html'
     paginate_by = 10
     
 class ListaUnmView(ListView):
@@ -687,7 +559,7 @@ class ListaUnmView(ListView):
     Página de listado de Unidades de Medida.
     '''
     queryset = UnMedida.objects.all().order_by('id')
-    template_name = 'cheff_app/lista_unm.html'
+    template_name = 'cheff_app/adminer/lista_unm.html'
     paginate_by = 10
 
 class ListaCpteView(ListView):
@@ -695,7 +567,7 @@ class ListaCpteView(ListView):
     Página de listado de Cptes.
     '''
     queryset = Comprobante.objects.all().order_by('id')
-    template_name = 'cheff_app/lista_cpte.html'
+    template_name = 'cheff_app/adminer/lista_cpte.html'
     paginate_by = 10
 
 class ListaCtaProvView(ListView):
@@ -703,7 +575,7 @@ class ListaCtaProvView(ListView):
     Página de listado de Cuentas Proveedor.
     '''
     queryset = CtaProv.objects.all().order_by('proveedor')
-    template_name = 'cheff_app/lista_cta_prov.html'
+    template_name = 'cheff_app/adminer/lista_cta_prov.html'
     paginate_by = 10
 
 class DetailView(TemplateView):
