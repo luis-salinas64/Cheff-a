@@ -1,9 +1,11 @@
+from unittest import registerResult
 from django.contrib import admin
 from django.urls import path,include
 from django.views.generic import base
 from django.views.generic.base import View
 
 from cheff_app.views import *
+from cheff_app.filters import *
 
 # Librerías para el manejo de sesión.
 from django.contrib.auth import views as auth_views
@@ -57,19 +59,23 @@ path('carga_form_cpte',login_required(register_cpte), name='carga_form_cpte'),
 path('carga_form_cpte/<int:id>',login_required(edit_cpte), name='edit_cpte'),
 path('delete_cpte/<int:id>',login_required(delete_cpte), name='delete_cpte'),
 
-path('carga_ctaprov',login_required(register_ctaprov), name='carga_ctaprov'),
+#path('carga_ctaprov',login_required(register_ctaprov), name='carga_ctaprov'),
+
 
 
 path('lista_me',login_required(ListaMesaView.as_view()), name='lista_me'),
 path('lista_producto',login_required(ListaProductoView.as_view()), name='lista_producto'),
 path('lista_cat',login_required(ListaCatView.as_view()), name='lista_cat'),
-path('lista_prov',login_required(ListaProvView.as_view()), name='lista_prov'),
+path('lista_prov',login_required(buscar_prov), name='lista_prov'),
 path('lista_moz',login_required(ListaMozView.as_view()), name='lista_moz'),
 path('lista_unm',login_required(ListaUnmView.as_view()), name='lista_unm'),
 path('lista_cpte',login_required(ListaCpteView.as_view()), name='lista_cpte'),
 path('lista_ctaprov',login_required(ListaCtaProvView.as_view()), name='lista_ctaprov'),
+path('carga_ctaprov',login_required(RegisterCuentaProveedorView.as_view()), name='carga_ctaprov'),
 
 path('admin', login_required(AdminView.as_view()), name='admin'),
+
+path('search_prov',login_required(search_prov),name='search_prov'),
 
 
 # NOTE: Ejemplos de Bootstrap HTML:

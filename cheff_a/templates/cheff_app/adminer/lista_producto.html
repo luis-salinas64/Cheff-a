@@ -10,22 +10,22 @@ Listados
 {% load static %}
 <center><h2>Listado de Producto Terminado</h2></center>
 <br>
-<div class="listas">
-<table>
-    <thead class=list-admin>
+
+<table class="table table-bordered">
+    
         <tr>
             
-            <td>Codigo|</td>
-            <td>Nombre|</td>
-            <td>Pcio.Costo|</td>
-            <td>Pcio.Venta|</td>
-            <td>Un Medida|</td>
-            <td>Medida Prod|</td>
-            <td>Cant|</td>
-            <td>Stock|</td>
+            <td>Codigo</td>
+            <td>Nombre</td>
+            <td>Pcio.Costo</td>
+            <td>Pcio.Venta</td>
+            <td>Un Medida</td>
+            <td>Medida Prod</td>
+            <td>Cant</td>
+            <td>Stock</td>
             
         </tr>
-    </thead>
+    
 
     <tbody>
         
@@ -39,12 +39,12 @@ Listados
             <td>{{pt.precio_venta}}</td>
             <td>{{pt.un_medida}}</td>
             <td>{{pt.medida_producto}}</td>
-            <td>{{pt_cantidad}}</td>
+            <td>{{pt.cantidad}}</td>
             <td>{{pt.stock}}</td>
             
             
-            <td><a class="btn btn-info" href="{% url 'edit_pt' pt.codigo %}"  >Editar</a></td>
-            <td><a class="btn btn-danger" href="{% url 'delete_pt' pt.codigo %}" >Eliminar</a></td>
+            <td><a class="btn btn-info btn-sm" href="{% url 'edit_producto' pt.codigo %}"  >Editar</a></td>
+            <td><a class="btn btn-danger btn-sm" href="{% url 'delete_producto' pt.codigo %}" >Eliminar</a></td>
                 
         </tr>
         {% endfor %}
@@ -58,7 +58,7 @@ Listados
 
 
 </table>
-</div>
+
 <br>
 <div class="volver">
 <a href="{% url 'admin'%}" style=><center>Volver</center></a>

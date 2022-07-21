@@ -1,28 +1,36 @@
 {% extends "cheff_app/admin.html" %}
 {% block title %}
 
-
 Listados    
 
 {% endblock title %}
 
 {% block content %}
 {% load static %}
+<div>
 <center><h2>Listado de Moza/o</h2></center>
+</div>
+<div class = "listas">
+    <a href = "/cheff-app/carga_form_moz">Nueva Moza/o</a>                
+
+</div>
 <br>
-<div class="listas">
-<table>
-    <thead class=list-admin>
+
+<table class="table table-bordered">
+    
         <tr>
             
-            <td>Legajo|</td>
-            <td>Nombre|</td>
-            <td>Cuil|</td>
-            <td>Fº Ing</td>
+            <td><center>Legajo</center></td>
+            <td><center>Nombre</center></td>
+            <td><center>Cuil</center></td>
+            <td><center>Fecha Ingreso</center></td>
+            <td><center>Modificar</center></td>
+            <td><center>Eliminar</center></td>
+
 
              
         </tr>
-    </thead>
+    
 
     <tbody>
         
@@ -35,8 +43,12 @@ Listados
             <td>{{moz.cuil}}</td>
             <td>{{moz.fecha_ingreso}}</td>
 
-            <td><a class="btn btn-info" href="{% url 'edit_moz' moz.legajo %}"  >Editar</a></td>
-            <td><a class="btn btn-danger" href="{% url 'delete_moz' moz.legajo %}" >Eliminar</a></td>
+            <td><center><a href="{% url 'edit_moz' moz.legajo %}">
+                <img src="{% static 'cheff-app/img/edit.png'%}" width="40px" height="30px" ></a></center></td>
+            
+            <td><a href="{% url 'delete_moz' moz.legajo %}">
+                <img src="{% static 'cheff-app/img/delete.jpeg'%}" width="30px" height="30px" ></a></center></td>
+            
                 
         </tr>
         {% endfor %}
@@ -50,7 +62,7 @@ Listados
 
 
 </table>
-</div>
+
 <br>
 <div class="volver">
 <a href="{% url 'admin'%}" style=><center>Volver</center></a>

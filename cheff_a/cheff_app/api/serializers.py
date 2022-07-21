@@ -15,8 +15,7 @@ class ProductoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Producto
-        fields = ('codigo','categoria','nombre','precio_costo','precio_venta',
-                'un_medida','medida_producto','cantidad','stock','desperdicio')
+        fields = ('__all__')
 
 
 

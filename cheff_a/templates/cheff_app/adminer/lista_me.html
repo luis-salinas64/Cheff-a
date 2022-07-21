@@ -1,24 +1,30 @@
 {% extends "cheff_app/admin.html" %}
 {% block title %}
 
-
 Listados    
 
 {% endblock title %}
 
 {% block content %}
 {% load static %}
+
+<div>
 <center><h2>Listado de Mesas</h2></center>
+</div>
+<div class = "listas">
+    <a href = "/cheff-app/carga_form_me">Nueva Mesa</a>                
+
+</div>
 <br>
-<div class="listas">
-<table>
-    <thead class=list-admin>
+<table class = "table table-bordered">
+    <thead>
         <tr>
             
-            <td>Numero|</td>
-            <td>Capacidad|</td>
-            <td>Descripcion|</td>
-             
+            <td><center>Numero</center></td>
+            <td><center>Capacidad</center></td>
+            <td><center>Descripcion</center></td>
+            <td><center>Modificar</center></td>
+            <td><center>Eliminar</center></td>
         </tr>
     </thead>
 
@@ -32,8 +38,11 @@ Listados
             <td>{{mesa.capacidad}}</td>
             <td>{{mesa.descripcion}}</td>
             
-            <td><a class="btn btn-info" href="{% url 'edit_me' mesa.numero %}"  >Editar</a></td>
-            <td><a class="btn btn-danger" href="{% url 'delete_me' mesa.numero %}" >Eliminar</a></td>
+            <td><center><a href="{% url 'edit_me' mesa.numero %}">
+                <img src="{% static 'cheff-app/img/edit.png'%}" width="30px" height="30px" ></a></center></td>
+            <td><center><a href="{% url 'delete_me' mesa.numero %}">
+                <img src="{% static 'cheff-app/img/delete.jpeg'%}" width="30px" height="30px" ></a></center></td>
+            
                 
         </tr>
         {% endfor %}

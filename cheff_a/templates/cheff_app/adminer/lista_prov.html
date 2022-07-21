@@ -8,17 +8,28 @@ Listados
 
 {% block content %}
 {% load static %}
-<center><h2>Listado de Proveedores</h2></center>
+<div>
+<center><h3>Listado de Proveedores</h3></center>
+</div>
+
+    <form method="get">
+
+        {{filter.form.as_table}}
+
+        <button type = "submit" class="btn btn-primary btn-sm" >Buscar</button>
+        </form>
+</div>
 <br>
-<div class="listas">
-<table>
-    <thead class=list-admin>
+
+
+<table class = "table table-bordered">
+    
         <tr>
             
-            <td>Codigo|</td>
-            <td>Nombre|</td>
-            <td>CUIT|</td>
-            <td>Contacto|</td>
+            <td>Codigo</td>
+            <td>Nombre</td>
+            <td>CUIT</td>
+            <td>Telefono</td>
             
             
         </tr>
@@ -26,19 +37,19 @@ Listados
 
     <tbody>
         
-        {% if object_list %}
-        {% for prov in object_list %}
+        {% if filter %}
+        {% for prov in filter.qs %}
         <tr>
             
             <td>{{prov.codigo}}</td>
             <td>{{prov.nombre}}</td>
             <td>{{prov.cuit}}</td>
-            <td>{{prov.contacto}}</td>
+            <td>{{prov.telefono}}</td>
             
             
             
-            <td><a class="btn btn-info" href="{% url 'edit_prov' prov.codigo %}"  >Editar</a></td>
-            <td><a class="btn btn-danger" href="{% url 'delete_prov' prov.codigo %}" >Eliminar</a></td>
+            <td><a class="btn btn-info btn-sm" href="{% url 'edit_prov' prov.codigo %}"  >Editar</a></td>
+            <td><a class="btn btn-danger btn-sm" href="{% url 'delete_prov' prov.codigo %}" >Eliminar</a></td>
                 
         </tr>
         {% endfor %}

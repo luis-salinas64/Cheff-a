@@ -13,7 +13,9 @@ from django.contrib import messages
 
 # Importamos los modelos que vamos a usar:
 from django.contrib.auth.models import User
+from matplotlib.style import context
 from cheff_app.models import *
+from cheff_app.filters import *
 
 
 # Formulario de registro:
@@ -24,6 +26,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 
 from cheff_app.forms import *
+from cheff_app.api import *
 
 # ----------------------------------Usuarios----------------------------------
 class LoginUserView(TemplateView):
@@ -128,7 +131,7 @@ def register_mesa(request):
         if form.is_valid():
             form.save()
             
-            return redirect('/cheff-app/ok')
+            return redirect('/cheff-app/lista_me')
     else:
         # Si el método no es de tipo POST, se crea un objeto de tipo formulario
         # Y luego se envía al contexto de renderización.
@@ -153,7 +156,7 @@ def edit_me(request,numero):
         if form.is_valid():
             form.save()
 
-            return redirect('/cheff-app/ok')
+            return redirect('/cheff-app/lista_me')
     return render (request, 'cheff_app/adminer/carga_form_me.html', {'form':form})
 
 # Eliminar Mesa
@@ -180,7 +183,7 @@ def register_cat(request):
         if form.is_valid():
             form.save()
             
-            return redirect('/cheff-app/ok')
+            return redirect('/cheff-app/lista_cat')
     else:
         form = CategoriaForm()
 
@@ -203,7 +206,7 @@ def edit_cat(request,codigo):
         if form.is_valid():
             form.save()
             
-            return redirect('/cheff-app/ok')
+            return redirect('/cheff-app/lista_cat')
 
     return render (request, 'cheff_app/adminer/carga_form_cat.html', {'form':form})
 
@@ -232,7 +235,7 @@ def register_moz(request):
         if form.is_valid():
             form.save()
             
-            return redirect('/cheff-app/ok')
+            return redirect('/cheff-app/lista_moz')
     else:
         form = Moza_oForm()
 
@@ -255,8 +258,8 @@ def edit_moz(request,legajo):
         if form.is_valid():
             form.save()
             
+            return redirect('/cheff-app/lista_moz')
 
-            return redirect('/cheff-app/ok')
     return render (request, 'cheff_app/adminer/carga_form_moz.html', {'form':form})
 
 # Eliminar Moza_o:
@@ -491,25 +494,65 @@ class OkCargaView(TemplateView):
 
 # Registrar cuenta Proveedor:
 
-def register_ctaprov(request):
-    
-    form = None
+class RegisterCuentaProveedorView(TemplateView):
+    template_name = 'cheff_app/adminer/carga_ctaprov.html'
 
-    if request.method == 'POST':
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['proveedores'] = Proveedor.objects.all()
+        print(context['proveedores'])
+
+        return context
+        
+    def get(self, request):
+        form = CtaProvForm()
+        return render(request, self.template_name, {'form':form})
+
+    def post(self, request):
         form = CtaProvForm(request.POST)
 
         if form.is_valid():
             form.save()
-            print("valido")
-
             return redirect('/cheff-app/ok')
-    
-    else:
-        # Si el método no es de tipo POST, se crea un objeto de tipo formulario
-        # Y luego se envía al contexto de renderización.
-        form = CtaProvForm()
+        return render(request, self.template_name, {'form':form})
 
-    return render(request,'cheff_app/adminer/carga_ctaprov.html', {'form':form})
+
+def search_prov(request,nombre):    
+
+        if request.method == 'GET':
+            
+            proveedor = Proveedor.objects.get(nombre=nombre)
+            print(proveedor)
+
+            return proveedor
+        else:
+            return render(request, 'cheff_app/adminer/carga_ctaprov.html', {'proveedor':proveedor})
+       
+        
+    
+
+# def register_ctaprov(request):
+    
+#     form = None
+
+#     if request.method == 'POST':
+#         form = CtaProvForm(request.POST)
+
+#         if form.is_valid():
+#             form.save()
+#             print("valido")
+
+#             return redirect('/cheff-app/ok')
+    
+#     else:
+#         # Si el método no es de tipo POST, se crea un objeto de tipo formulario
+#         # Y luego se envía al contexto de renderización.
+#         form = CtaProvForm()
+
+#     return render(request,'cheff_app/adminer/carga_ctaprov.html', {'form':form})
+
+
 
 # ------------------------------ listados ----------------------------------------
 
@@ -538,13 +581,12 @@ class ListaCatView(ListView):
     template_name = 'cheff_app/adminer/lista_cat.html'
     paginate_by = 10
 
-class ListaProvView(ListView):
-    '''
-    Página de listado de Proveedores.
-    '''
-    queryset = Proveedor.objects.all().order_by('id')
-    template_name = 'cheff_app/adminer/lista_prov.html'
-    paginate_by = 10
+
+def buscar_prov(request):
+
+    f = ProveedorFilter(request.GET, queryset=Proveedor.objects.all())
+    return render(request, 'cheff_app/adminer/lista_prov.html', {'filter': f})
+
 
 class ListaMozView(ListView):
     '''
@@ -574,9 +616,18 @@ class ListaCtaProvView(ListView):
     '''
     Página de listado de Cuentas Proveedor.
     '''
-    queryset = CtaProv.objects.all().order_by('proveedor')
+    model = CtaProv
+    queryset = CtaProv.objects.all().order_by('id')
     template_name = 'cheff_app/adminer/lista_cta_prov.html'
     paginate_by = 10
+
+    
+    
+    def context_data(self, **kwargs):
+        context = super().context_data(**kwargs)
+        myFilter = CtaProvFilter(self.request.GET, queryset=self.get_queryset('CtaProv'))
+        context['filter'] = myFilter
+        return context
 
 class DetailView(TemplateView):
     template_name = 'cheff_app/detail.html'

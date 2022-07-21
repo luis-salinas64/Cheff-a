@@ -1,21 +1,32 @@
 {% extends "cheff_app/admin.html" %}
 {% block title %}
 
-
 Listados    
 
 {% endblock title %}
 
 {% block content %}
 {% load static %}
+
+<div>
+
 <center><h2>Listado de Categorias</h2></center>
+
+</div>
+
+<div class = "listas">
+    <a href = "/cheff-app/carga_form_cat">Nueva Categoria</a>                
+
+</div>
 <br>
-<div class="listas">
-<table>
-    <thead class=list-admin>
+
+<table class = "table table-bordered">
+    
         <tr>
-            <td>Codigo|</td>
-            <td>Nombre|</td>
+            <td><center>Codigo</center></td>
+            <td><center>Nombre</center></td>
+            <td><center>Modificar</center></td>
+            <td><center>Eliminar</center></td>
             
         </tr>
     </thead>
@@ -29,8 +40,11 @@ Listados
             <td>{{cat.nombre}}</td>
             
             
-            <td><a class="btn btn-info" href="{% url 'edit_cat' cat.codigo %}"  >Editar</a></td>
-            <td><a class="btn btn-danger" href="{% url 'delete_cat' cat.codigo %}" >Eliminar</a></td>
+            <td><center><a href="{% url 'edit_cat' cat.codigo %}">
+                <img src="{% static 'cheff-app/img/edit.png'%}" width="30px" height="30px" ></a></center></td>
+            <td><center><a href="{% url 'delete_cat' cat.codigo %}">
+                <img src="{% static 'cheff-app/img/delete.jpeg'%}" width="30px" height="30px" ></a></center></td>
+            
                 
         </tr>
         {% endfor %}
@@ -44,7 +58,7 @@ Listados
 
 
 </table>
-</div>
+
 <br>
 <div class="volver">
 <a href="{% url 'admin'%}" style=><center>Volver</center></a>

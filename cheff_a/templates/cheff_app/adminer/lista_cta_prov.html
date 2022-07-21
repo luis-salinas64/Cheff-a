@@ -7,23 +7,33 @@ Listados
 {% endblock title %}
 
 {% block content %}
-{% load static %}
+
+
+
 <center><h2>Listado Cuenta Proveedor</h2></center>
 <br>
-<div class="listas">
-<table>
-    <thead class=list-admin>
+
+    
+    <form method="GET">
+
+    {{filter.form.as_p}}
+    <button type = "submit" class="btn btn-primary btn-sm" >Buscar</button>
+    </form>
+    
+
+<table class="table table-bordered">
+
+    <thead>
         <tr>
             
-            <td>Proveedor|</td>
-            <td>Fecha|</td>
-            <td>Cpte Nº|</td>
-            <td>Tipo|</td>
-            <td>Importe|</td>
-            
-            
-            
+            <td>Proveedor</td>
+            <td>Fecha</td>
+            <td>Cpte Nº</td>
+            <td>Tipo</td>
+            <td>Importe</td>
+                    
         </tr>
+
     </thead>
 
     <tbody>

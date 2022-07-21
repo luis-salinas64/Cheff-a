@@ -10,16 +10,16 @@ Listados
 {% load static %}
 <center><h2>Listado de Medidas</h2></center>
 <br>
-<div class="listas">
-<table>
-    <thead class=list-admin>
+
+<table class="table table-bordered">
+    
         <tr>
             
-            <td>Id|</td>
-            <td>Nombre|</td>
+            <td>Id</td>
+            <td>Nombre</td>
                         
         </tr>
-    </thead>
+    
 
     <tbody>
         
@@ -30,8 +30,8 @@ Listados
             <td>{{unm.id}}</td>
             <td>{{unm.un_medida}}</td>
                        
-            <td><a class="btn btn-info" href="{% url 'edit_unm' unm.id %}"  >Editar</a></td>
-            <td><a class="btn btn-danger" href="{% url 'delete_unm' unm.id %}" >Eliminar</a></td>
+            <td><a class="btn btn-info btn-sm" href="{% url 'edit_unm' unm.id %}"  >Editar</a></td>
+            <td><a class="btn btn-danger btn-sm" href="{% url 'delete_unm' unm.id %}" >Eliminar</a></td>
                 
         </tr>
         {% endfor %}
@@ -45,7 +45,7 @@ Listados
 
 
 </table>
-</div>
+
 <br>
 <div class="volver">
 <a href="{% url 'admin'%}" style=><center>Volver</center></a>

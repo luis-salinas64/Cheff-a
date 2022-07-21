@@ -99,7 +99,7 @@ class Moza_o(models.Model):
 
     legajo = models.PositiveIntegerField(verbose_name='legajo', unique=True)
 
-    nombre = models.CharField(verbose_name='nombre', max_length=80, default='')
+    nombre = models.CharField(verbose_name='nombre', max_length=80, default='dd/mm/aaaa')
 
     fecha_ingreso = models.DateField(verbose_name='fecha_ingreso',default=datetime.date.today)
 
@@ -176,17 +176,20 @@ class CtaProv(models.Model):
 
     importe_total = models.DecimalField(verbose_name='importe_total',max_digits=10, decimal_places=2)
 
-    debe = models.DecimalField(verbose_name='debe',max_digits=10, decimal_places=2)
+    debe = models.DecimalField(verbose_name='debe',max_digits=10,
+                                decimal_places=2,null=True,blank=True)
 
-    haber = models.DecimalField(verbose_name='haber',max_digits=10, decimal_places=2)
+    haber = models.DecimalField(verbose_name='haber',max_digits=10, decimal_places=2,
+                                null=True,blank=True)
 
-    saldo = models.DecimalField(verbose_name='saldo',max_digits=10, decimal_places=2)
+    saldo = models.DecimalField(verbose_name='saldo',max_digits=10, decimal_places=2,
+                                null=True,blank=True)
     
     class Meta:
         db_table = 'cta_prov'
 
     def __str__(self):
-        return str(self.id)
+        return str(self.id,self.proveedor)
 
 
 

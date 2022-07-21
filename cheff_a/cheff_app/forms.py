@@ -1,4 +1,6 @@
+
 from django import forms
+
 from cheff_app.models import *
 from random import choices
 
@@ -19,7 +21,7 @@ class ProductoForm(forms.ModelForm):
 class ProveedorForm(forms.ModelForm):
     class Meta:
         model = Proveedor
-        fields = ('codigo','nombre','cuit','direccion','telefono','porc_iva')
+        exclude = ('id',)
         
 class CategoriaForm(forms.ModelForm):
     class Meta:
@@ -38,10 +40,14 @@ class UnMedidaForm(forms.ModelForm):
 
 class CpteForm(forms.ModelForm):
     class Meta:
+        
         model = Comprobante
         fields = ('__all__')
 
 class CtaProvForm(forms.ModelForm):
     class Meta:
+
         model = CtaProv
-        fields = ('__all__')
+        
+        exclude = ('id','debe','haber','saldo')
+        
