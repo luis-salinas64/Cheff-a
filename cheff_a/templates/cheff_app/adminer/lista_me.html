@@ -12,26 +12,38 @@ Listados
 <center><h2>Listado de Mesas</h2></center>
 </div>
 <div class = "listas">
-    <a href = "/cheff-app/carga_form_me">Nueva Mesa</a>                
+    <a href = "/cheff-app/carga_form_me">+ Agregar</a>                
 
 </div>
+
+
 <br>
 <table class = "table table-bordered">
     <thead>
         <tr>
             
-            <td><center>Numero</center></td>
-            <td><center>Capacidad</center></td>
-            <td><center>Descripcion</center></td>
-            <td><center>Modificar</center></td>
-            <td><center>Eliminar</center></td>
+            <td><center><b>Numero</b></center></center></td>
+            <td><center><b>Capacidad</b></center></td>
+            <td><center><b>Descripcion</b></center></td>
+            <td><center><b>Modificar</b></center></td>
+            <td><center><b>Eliminar</b></center></td>
         </tr>
     </thead>
 
     <tbody>
         
         {% if object_list %}
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>{{message}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+                               
+        {% endfor %}
+        {% endif %}
         {% for mesa in object_list %}
+        
         <tr>
             
             <td>{{mesa.numero}}</td>
@@ -39,7 +51,7 @@ Listados
             <td>{{mesa.descripcion}}</td>
             
             <td><center><a href="{% url 'edit_me' mesa.numero %}">
-                <img src="{% static 'cheff-app/img/edit.png'%}" width="30px" height="30px" ></a></center></td>
+                <img src="{% static 'cheff-app/img/edit.png'%}" width="40px" height="30px" ></a></center></td>
             <td><center><a href="{% url 'delete_me' mesa.numero %}">
                 <img src="{% static 'cheff-app/img/delete.jpeg'%}" width="30px" height="30px" ></a></center></td>
             
@@ -56,10 +68,11 @@ Listados
 
 
 </table>
-</div>
+
+
 <br>
 <div class="volver">
-<a href="{% url 'admin'%}" style=><center>Volver</center></a>
+<a href="{% url 'admin'%}" style=><center>Menu</center></a>
 </div>
 
 

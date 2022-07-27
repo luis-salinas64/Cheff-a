@@ -29,8 +29,6 @@ path('logout', auth_views.LogoutView.as_view(next_page='/cheff-app/index', redir
 path('signup', register, name='register'),
 path('index', IndexView.as_view(), name='index'),
 
-path('ok', OkCargaView.as_view(), name='ok'),
-
 path('carga_form_me', login_required(register_mesa), name='carga_form_me'),
 path('edit_me/<int:numero>',login_required(edit_me), name='edit_me'),
 path('delete_me/<int:numero>',login_required(delete_me), name='delete_me'),
@@ -64,9 +62,10 @@ path('delete_cpte/<int:id>',login_required(delete_cpte), name='delete_cpte'),
 
 
 path('lista_me',login_required(ListaMesaView.as_view()), name='lista_me'),
-path('lista_producto',login_required(ListaProductoView.as_view()), name='lista_producto'),
+path('lista_producto',login_required(buscar_producto), name='lista_producto'),
 path('lista_cat',login_required(ListaCatView.as_view()), name='lista_cat'),
 path('lista_prov',login_required(buscar_prov), name='lista_prov'),
+
 path('lista_moz',login_required(ListaMozView.as_view()), name='lista_moz'),
 path('lista_unm',login_required(ListaUnmView.as_view()), name='lista_unm'),
 path('lista_cpte',login_required(ListaCpteView.as_view()), name='lista_cpte'),
@@ -74,8 +73,6 @@ path('lista_ctaprov',login_required(ListaCtaProvView.as_view()), name='lista_cta
 path('carga_ctaprov',login_required(RegisterCuentaProveedorView.as_view()), name='carga_ctaprov'),
 
 path('admin', login_required(AdminView.as_view()), name='admin'),
-
-path('search_prov',login_required(search_prov),name='search_prov'),
 
 
 # NOTE: Ejemplos de Bootstrap HTML:

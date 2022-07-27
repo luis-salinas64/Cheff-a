@@ -8,43 +8,64 @@ Listados
 
 {% block content %}
 {% load static %}
-<center><h2>Listado de Producto Terminado</h2></center>
+<center><h2>Listado de Productos</h2></center> 
+<div class = "listas">
+    <a href = "/cheff-app/carga_producto">Nuevo Producto</a>
+</div>
 <br>
+<div>
+    <form method="get">
 
+        {{filter.form.as_table}}
+
+        <button type = "submit" class="btn btn-primary btn-sm" >Buscar</button>
+        </form>
+</div>
 <table class="table table-bordered">
     
         <tr>
             
-            <td>Codigo</td>
-            <td>Nombre</td>
-            <td>Pcio.Costo</td>
-            <td>Pcio.Venta</td>
-            <td>Un Medida</td>
-            <td>Medida Prod</td>
-            <td>Cant</td>
-            <td>Stock</td>
+            <td><center><b>Codigo</b></center></td>            
+            <td><center><b>Nombre</b></center></td>
+            <td><center><b>Categoria</b></center></td>
+            <td><center><b>Pcio.Costo</b></center></td>
+            <td><center><b>Pcio.Venta</b></center></td>
+            <td><center><b>Stock</b></center></td>
+            <td><center><b>Modificar</b></center></td>
+            <td><center><b>Eliminar</b></center></td>
             
         </tr>
     
 
     <tbody>
         
-        {% if object_list %}
-        {% for pt in object_list %}
-        <tr>
-            
-            <td>{{pt.codigo}}</td>
+        {% if filter %}
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>{{message}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+                               
+        {% endfor %}
+        {% endif %}
+        {% for pt in filter.qs %}
+        <tr>            
+            <td>{{pt.codigo}}</td>            
             <td>{{pt.nombre}}</td>
+            <td>{{pt.categoria}}</td>
             <td>{{pt.precio_costo}}</td>
             <td>{{pt.precio_venta}}</td>
-            <td>{{pt.un_medida}}</td>
-            <td>{{pt.medida_producto}}</td>
-            <td>{{pt.cantidad}}</td>
             <td>{{pt.stock}}</td>
             
             
-            <td><a class="btn btn-info btn-sm" href="{% url 'edit_producto' pt.codigo %}"  >Editar</a></td>
-            <td><a class="btn btn-danger btn-sm" href="{% url 'delete_producto' pt.codigo %}" >Eliminar</a></td>
+            
+            <td><center><a href="{% url 'edit_producto' pt.codigo %}">
+                <img src="{% static 'cheff-app/img/edit.png'%}" width="40px" height="30px"></a></center></td>
+            
+            <td><center><a href="{% url 'delete_producto' pt.codigo %}">
+                <img src="{% static 'cheff-app/img/delete.jpeg'%}" width="30px" height="30px"></a></center></td>
+            
                 
         </tr>
         {% endfor %}
@@ -61,7 +82,7 @@ Listados
 
 <br>
 <div class="volver">
-<a href="{% url 'admin'%}" style=><center>Volver</center></a>
+<a href="{% url 'admin'%}" style=><center>Menu</center></a>
 </div>
 
 

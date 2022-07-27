@@ -19,7 +19,7 @@ class Proveedor(admin.ModelAdmin):
 @admin.register(Categoria)
 class Categoria(admin.ModelAdmin):
     search_fields = ['nombre']
-    list_display = ('id','nombre')
+    list_display = ('id','codigo','nombre')
 
 
 @admin.register(UnMedida)

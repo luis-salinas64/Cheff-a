@@ -12,6 +12,13 @@ Listados
 <center><h3>Listado de Proveedores</h3></center>
 </div>
 
+<div class = "listas">
+    <a href = "/cheff-app/carga_form_prov">+ Agregar</a>                
+
+</div>
+<br>
+
+<div>
     <form method="get">
 
         {{filter.form.as_table}}
@@ -25,12 +32,15 @@ Listados
 <table class = "table table-bordered">
     
         <tr>
-            
-            <td>Codigo</td>
-            <td>Nombre</td>
-            <td>CUIT</td>
-            <td>Telefono</td>
-            
+            <center>
+            <td><center><b>Codigo</b></center></td>
+            <td><center><b>Nombre</b></center></td>
+            <td><center><b>CUIT</b></center></td>
+            <td><center><b>Telefono</b></center></td>
+            <td><center><b>Modificar</b></center></td>
+            <td><center><b>Eliminar</b></center></td>
+
+        </center>
             
         </tr>
     </thead>
@@ -38,6 +48,15 @@ Listados
     <tbody>
         
         {% if filter %}
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>{{message}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+                               
+        {% endfor %}
+        {% endif %}
         {% for prov in filter.qs %}
         <tr>
             
@@ -48,8 +67,12 @@ Listados
             
             
             
-            <td><a class="btn btn-info btn-sm" href="{% url 'edit_prov' prov.codigo %}"  >Editar</a></td>
-            <td><a class="btn btn-danger btn-sm" href="{% url 'delete_prov' prov.codigo %}" >Eliminar</a></td>
+            <td><center><a href="{% url 'edit_prov' prov.codigo %}">
+                <img src="{% static 'cheff-app/img/edit.png' %}" width="40" height="30"></center></a></td>
+
+            <td><a href="{% url 'delete_prov' prov.codigo %}">
+                <img src="{% static 'cheff-app/img/delete.jpeg' %}" width="30" height="30"></a></td>
+            
                 
         </tr>
         {% endfor %}
@@ -66,7 +89,7 @@ Listados
 </div>
 <br>
 <div class="volver">
-<a href="{% url 'admin'%}" style=><center>Volver</center></a>
+<a href="{% url 'admin'%}" style=><center>Menu</center></a>
 </div>
 
 

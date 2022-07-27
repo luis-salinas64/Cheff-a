@@ -18,6 +18,7 @@ from cheff_app.models import *
 from cheff_app.filters import *
 
 
+
 # Formulario de registro:
 from django import forms
 from django.shortcuts import render
@@ -101,7 +102,7 @@ class IndexView(ListView):
     Para ello tenemos que utilizar sus atributos:
     \n
     '''
-    queryset = Mesa.objects.all().order_by('id')
+    queryset = Mesa.objects.all().order_by('numero')
     # NOTE: Este queryset incorporará una lista de elementos a la que le asignará
     # Automáticamente el nombre de comic_list
     template_name = 'cheff_app/index.html'
@@ -130,6 +131,8 @@ def register_mesa(request):
         form = MesaForm(request.POST)
         if form.is_valid():
             form.save()
+            mesa = Mesa.objects.latest('id')
+            messages.success(request, f'Mesa {mesa} registrada orrectamente')
             
             return redirect('/cheff-app/lista_me')
     else:
@@ -155,6 +158,7 @@ def edit_me(request,numero):
 
         if form.is_valid():
             form.save()
+            messages.success(request,f'Mesa {numero} editada correctamente')
 
             return redirect('/cheff-app/lista_me')
     return render (request, 'cheff_app/adminer/carga_form_me.html', {'form':form})
@@ -167,6 +171,7 @@ def delete_me(request,numero):
 
     if request.method == 'POST':
         mesa.delete()
+        messages.success(request, f'Mesa {numero} eliminada')
 
         return redirect('/cheff-app/lista_me')
 
@@ -182,6 +187,8 @@ def register_cat(request):
         form = CategoriaForm(request.POST)
         if form.is_valid():
             form.save()
+            categoria = Categoria.objects.latest('id')
+            messages.success(request, f'Categoria "{categoria}" registrada correctamente')
             
             return redirect('/cheff-app/lista_cat')
     else:
@@ -206,6 +213,8 @@ def edit_cat(request,codigo):
         if form.is_valid():
             form.save()
             
+            messages.success(request,f'Categoria "{categoria}" editada correctamente')
+            
             return redirect('/cheff-app/lista_cat')
 
     return render (request, 'cheff_app/adminer/carga_form_cat.html', {'form':form})
@@ -218,7 +227,8 @@ def delete_cat(request,codigo):
 
     if request.method == 'POST':
         categoria.delete()
-        print('Categoria eliminada')
+        messages.success(request, f'Categoria {categoria} eliminada correctamente')
+
 
         return redirect('/cheff-app/lista_cat')
     
@@ -234,6 +244,8 @@ def register_moz(request):
         form = Moza_oForm(request.POST)
         if form.is_valid():
             form.save()
+            moz = Moza_o.objects.latest('id')
+            messages.success(request, f'Moza/o {moz}registrada Correctamente')
             
             return redirect('/cheff-app/lista_moz')
     else:
@@ -257,6 +269,7 @@ def edit_moz(request,legajo):
 
         if form.is_valid():
             form.save()
+            messages.success(request, f'Moza/o {moz} editada correctamente')
             
             return redirect('/cheff-app/lista_moz')
 
@@ -270,6 +283,8 @@ def delete_moz(request,legajo):
 
     if request.method == 'POST':
         moz.delete()
+        messages.success(request, f'Moza/o {moz} eliminada correctamente')
+
         
         return redirect('/cheff-app/lista_moz')
     
@@ -284,11 +299,12 @@ def register_producto(request):
         
         form = ProductoForm(request.POST)
         
-        if form.is_valid():
+        if form.is_valid():            
             form.save()
-            print("valido")
+            producto = Producto.objects.latest('id')
+            messages.success(request, f'Producto {producto} registrado correctamente')
 
-            return redirect('/cheff-app/ok')
+            return redirect('/cheff-app/lista_producto')
 
     else:
         # Si el método no es de tipo POST, se crea un objeto de tipo formulario
@@ -311,8 +327,9 @@ def edit_producto(request,codigo):
 
         if form.is_valid():
             form.save()
+            messages.success(request, f'Producto {producto} editado correctamente')
 
-            return redirect('/cheff-app/ok')
+            return redirect('/cheff-app/lista_producto')
 
     return render (request, 'cheff_app/adminer/carga_producto.html', {'form':form})
 
@@ -322,8 +339,9 @@ def delete_producto (request,codigo):
 
     pe = Producto.objects.get(codigo=codigo)
     if request.method=="POST":
-
         pe.delete()
+        messages.success(request, f'Producto {pe} eliminado correctamente')
+
         return redirect('/cheff-app/lista_producto')
 
     return render(request,'cheff_app/adminer/delete_producto.html',{'pe':pe})
@@ -337,9 +355,10 @@ def register_prov(request):
         
         if form.is_valid():
             form.save()
-            print("valido")
+            prov = Proveedor.objects.latest('id')
+            messages.success(request, f'Proveedor {prov} registrado correctamente')
 
-            return redirect('/cheff-app/ok')
+            return redirect('/cheff-app/lista_prov')
 
     else:
         # Si el método no es de tipo POST, se crea un objeto de tipo formulario
@@ -362,20 +381,22 @@ def edit_prov(request,codigo):
 
         if form.is_valid():
             form.save()
-            
+            messages.success(request, f'Proveedor {proveedor} editado correctamente')
 
-            return redirect('/cheff-app/ok')
+            return redirect('/cheff-app/lista_prov')
 
     return render (request, 'cheff_app/adminer/carga_form_prov.html', {'form':form})
 
 # Borrar Proveedor:
 def delete_prov(request,codigo):
+    
     form = None
 
     proveedor = Proveedor.objects.get(codigo=codigo)
 
     if request.method == 'POST':
         proveedor.delete()
+        messages.success(request, f'Proveedor {proveedor} eliminado correctamente')
         
         return redirect('/cheff-app/lista_prov')
 
@@ -390,8 +411,10 @@ def register_unm(request):
 
         if form.is_valid():
             form.save()
+            unm = UnMedida.objects.latest('id')
+            messages.success(request,f'Unidad de Medida "{unm}"registrada correctamente')
             
-            return redirect('/cheff-app/ok')
+            return redirect('/cheff-app/lista_unm')
     
     else:
         
@@ -413,8 +436,9 @@ def edit_unm(request,id):
 
         if form.is_valid():
             form.save()
+            messages.success(request, f'Unidad de Medida "{unidad}" editada correctamente')
             
-            return redirect('/cheff-app/ok')
+            return redirect('/cheff-app/lista_unm')
 
     return render (request, 'cheff_app/adminer/carga_form_unm.html', {'form':form})
 
@@ -426,6 +450,7 @@ def delete_unm(request,id):
     if request.method == 'POST':
         
         unidad.delete()
+        messages.success(request, f'Unidad de Medida "{unidad}" eliminada correctamente')
         
         return redirect('/cheff-app/lista_unm')
 
@@ -441,9 +466,10 @@ def register_cpte(request):
 
         if form.is_valid():
             form.save()
-            print("valido")
+            cpte = Comprobante.objects.latest('id')
+            messages.success(request, f'Cpte tipo "{cpte}" registrado correctamente')
 
-            return redirect('/cheff-app/ok')
+            return redirect('/cheff-app/lista_cpte')
     
     else:
         # Si el método no es de tipo POST, se crea un objeto de tipo formulario
@@ -466,8 +492,9 @@ def edit_cpte(request,id):
 
         if form.is_valid():
             form.save()
+            messages.success(request,f'Cpte {id} editado correctamente')
 
-            return redirect('/cheff-app/ok')
+            return redirect('/cheff-app/lista_cpte')
 
     return render (request, 'cheff_app/adminer/carga_form_cpte.html', {'form':form})
 
@@ -480,15 +507,13 @@ def delete_cpte(request,id):
     if request.method == 'POST':
         
         cpte.delete()
-        
+
+        messages.success(request, f'Cpte {id} eliminado correctamente')
+
         return redirect('/cheff-app/lista_cpte')
 
     return render(request,'cheff_app/adminer/delete_cpte.html',{'cpte':cpte})
 
-
-# Confirmacion de carga correcta
-class OkCargaView(TemplateView):
-    template_name = 'cheff_app/ok.html'
 
 
 
@@ -517,59 +542,15 @@ class RegisterCuentaProveedorView(TemplateView):
             return redirect('/cheff-app/ok')
         return render(request, self.template_name, {'form':form})
 
-
-def search_prov(request,nombre):    
-
-        if request.method == 'GET':
-            
-            proveedor = Proveedor.objects.get(nombre=nombre)
-            print(proveedor)
-
-            return proveedor
-        else:
-            return render(request, 'cheff_app/adminer/carga_ctaprov.html', {'proveedor':proveedor})
-       
-        
-    
-
-# def register_ctaprov(request):
-    
-#     form = None
-
-#     if request.method == 'POST':
-#         form = CtaProvForm(request.POST)
-
-#         if form.is_valid():
-#             form.save()
-#             print("valido")
-
-#             return redirect('/cheff-app/ok')
-    
-#     else:
-#         # Si el método no es de tipo POST, se crea un objeto de tipo formulario
-#         # Y luego se envía al contexto de renderización.
-#         form = CtaProvForm()
-
-#     return render(request,'cheff_app/adminer/carga_ctaprov.html', {'form':form})
-
-
+  
 
 # ------------------------------ listados ----------------------------------------
-
-class ListaProductoView(ListView):
-    '''
-    Página de listado de Productos.
-    '''
-    queryset = Producto.objects.all().order_by('id')
-    template_name = 'cheff_app/adminer/lista_producto.html'
-    paginate_by = 10
-
 
 class ListaMesaView(ListView):
     '''
     Página de listado de Mesas.
     '''
-    queryset = Mesa.objects.all().order_by('id')
+    queryset = Mesa.objects.all().order_by('numero')
     template_name = 'cheff_app/adminer/lista_me.html'
     paginate_by = 10
 
@@ -581,11 +562,18 @@ class ListaCatView(ListView):
     template_name = 'cheff_app/adminer/lista_cat.html'
     paginate_by = 10
 
-
+# Listado ABM Proveedor:
 def buscar_prov(request):
 
     f = ProveedorFilter(request.GET, queryset=Proveedor.objects.all())
     return render(request, 'cheff_app/adminer/lista_prov.html', {'filter': f})
+    
+
+# Listado ABM Producto:
+def buscar_producto(request):
+
+    f = ProductoFilter(request.GET, queryset=Producto.objects.all().order_by('nombre'))
+    return render(request, 'cheff_app/adminer/lista_producto.html', {'filter': f})
 
 
 class ListaMozView(ListView):

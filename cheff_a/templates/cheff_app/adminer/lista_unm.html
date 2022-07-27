@@ -9,14 +9,21 @@ Listados
 {% block content %}
 {% load static %}
 <center><h2>Listado de Medidas</h2></center>
+<div class = "listas">
+    <a href = "/cheff-app/carga_form_unm">+ Agregar</a>                
+
+</div>
+<br>
 <br>
 
 <table class="table table-bordered">
     
         <tr>
             
-            <td>Id</td>
-            <td>Nombre</td>
+            <td><center><b>Id</b></center></td>
+            <td><center><b>Nombre</b></center></td>
+            <td><center><b>Modificar</b></center></td>
+            <td><center><b>Eliminar</b></center></td>
                         
         </tr>
     
@@ -24,14 +31,27 @@ Listados
     <tbody>
         
         {% if object_list %}
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>{{message}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+                               
+        {% endfor %}
+        {% endif %}
         {% for unm in object_list %}
         <tr>
             
             <td>{{unm.id}}</td>
             <td>{{unm.un_medida}}</td>
                        
-            <td><a class="btn btn-info btn-sm" href="{% url 'edit_unm' unm.id %}"  >Editar</a></td>
-            <td><a class="btn btn-danger btn-sm" href="{% url 'delete_unm' unm.id %}" >Eliminar</a></td>
+            <td><center><a href="{% url 'edit_unm' unm.id %}">
+                <img src="{% static 'cheff-app/img/edit.png'%}" width="40px" height="30px" ></a></center></td>
+            
+            <td><center><a href="{% url 'delete_unm' unm.id %}">
+                <img src="{% static 'cheff-app/img/delete.jpeg'%}" width="30px" height="30px" ></a></center></td>
+            
                 
         </tr>
         {% endfor %}
@@ -48,7 +68,7 @@ Listados
 
 <br>
 <div class="volver">
-<a href="{% url 'admin'%}" style=><center>Volver</center></a>
+<a href="{% url 'admin'%}" style=><center>Menu</center></a>
 </div>
 
 

@@ -8,31 +8,33 @@
 <div class = "titulo">
     <center><h2> Menu Administrador </h2></center>
 </div>
+{% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>{{message}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+                               
+            {% endfor %}
+{% endif %}
 <br>
 
     <div class="grid-admin">
 
         <ul class = "opcion">
             
-            <!-- <li><a href = "/cheff-app/carga_form_me">Ingreso Mesas</a></li><br>             -->
-            <!-- <li><a href = "/cheff-app/carga_form_cat">Ingreso Categorias</a></li><br>             -->
-            <li><a href = "/cheff-app/carga_form_moz">Ingreso Moza/o</a></li><br>
-            <li><a href = "/cheff-app/carga_producto">Ingreso Producto</a></li><br>            
-            <li><a href = "/cheff-app/carga_form_prov">Ingreso Proveedores</a></li><br>
-            <li><a href = "/cheff-app/carga_form_unm">Ingreso Medidas</a></li><br>
-            <li><a href = "/cheff-app/carga_form_cpte">Ingreso Comprobantes</a></li><br>
-            <li><a href = "/cheff-app/carga_ctaprov">Ingreso Cta Proveedores</a></li><br>
+            <li><a href = "/cheff-app/lista_me">A-B-M Mesas</a></li><br> 
+            <li><a href = "/cheff-app/lista_cpte">A-B-M Comprobantes</a></li><br>
+            <li><a href = "/cheff-app/lista_unm">A-B-M Medidas</a></li><br>
+            <li><a href = "/cheff-app/lista_moz">A-B-M Mozas/os</a></li><br>          
                   
         </ul>
 
         <ul class = "opcion">
-            <li><a href = "/cheff-app/lista_me">A-B-M Mesas</a></li><br> 
+            
             <li><a href = "/cheff-app/lista_cat">A-B-M Categorias</a></li><br>
-            <li><a href = "/cheff-app/lista_moz">Listar-Editar-Eliminar Mozas/os</a></li><br>          
-            <li><a href = "/cheff-app/lista_producto">Listar-Editar-Eliminar Producto</a></li><br>            
-            <li><a href = "/cheff-app/lista_prov">Listar-Editar-Eliminar Proveedores</a></li><br>
-            <li><a href = "/cheff-app/lista_unm">Listar-Editar-Eliminar Medidas</a></li><br>
-            <li><a href = "/cheff-app/lista_cpte">Listar-Editar-Eliminar Comprobantes</a></li><br>
+            <li><a href = "/cheff-app/lista_producto">A-B-M Productos</a></li><br>            
+            <li><a href = "/cheff-app/lista_prov">A-B-M Proveedores</a></li><br>          
             <li><a href = "/cheff-app/lista_ctaprov">Listar Cta Proveedores</a></li><br>
             
             

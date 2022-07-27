@@ -15,7 +15,7 @@ Listados
 </div>
 
 <div class = "listas">
-    <a href = "/cheff-app/carga_form_cat">Nueva Categoria</a>                
+    <a href = "/cheff-app/carga_form_cat">+ Agregar</a>                
 
 </div>
 <br>
@@ -23,10 +23,10 @@ Listados
 <table class = "table table-bordered">
     
         <tr>
-            <td><center>Codigo</center></td>
-            <td><center>Nombre</center></td>
-            <td><center>Modificar</center></td>
-            <td><center>Eliminar</center></td>
+            <td><center><b>Codigo</b></center></td>
+            <td><center><b>Nombre</b></center></td>
+            <td><center><b>Modificar</b></center></td>
+            <td><center><b>Eliminar</b></center></td>
             
         </tr>
     </thead>
@@ -34,6 +34,15 @@ Listados
     <tbody>
         
         {% if object_list %}
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>{{message}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+                               
+            {% endfor %}
+        {% endif %}
         {% for cat in object_list %}
         <tr>
             <td>{{cat.codigo}}</td>
@@ -41,7 +50,7 @@ Listados
             
             
             <td><center><a href="{% url 'edit_cat' cat.codigo %}">
-                <img src="{% static 'cheff-app/img/edit.png'%}" width="30px" height="30px" ></a></center></td>
+                <img src="{% static 'cheff-app/img/edit.png'%}" width="40px" height="30px" ></a></center></td>
             <td><center><a href="{% url 'delete_cat' cat.codigo %}">
                 <img src="{% static 'cheff-app/img/delete.jpeg'%}" width="30px" height="30px" ></a></center></td>
             
@@ -49,19 +58,19 @@ Listados
         </tr>
         {% endfor %}
 
-        {% else %}
+        
+    </tbody>
+    {% else %}
     
-        <center><h1>No hay categorias ingresadas</h1></center>
+        <center><h2>No hay categorias ingresadas</h2></center>
 
         {% endif %}
-    </tbody>
-
 
 </table>
 
 <br>
 <div class="volver">
-<a href="{% url 'admin'%}" style=><center>Volver</center></a>
+<a href="{% url 'admin'%}" style=><center>Menu</center></a>
 </div>
 
 

@@ -11,7 +11,7 @@ Listados
 <center><h2>Listado de Moza/o</h2></center>
 </div>
 <div class = "listas">
-    <a href = "/cheff-app/carga_form_moz">Nueva Moza/o</a>                
+    <a href = "/cheff-app/carga_form_moz">+ Agregar</a>                
 
 </div>
 <br>
@@ -20,12 +20,12 @@ Listados
     
         <tr>
             
-            <td><center>Legajo</center></td>
-            <td><center>Nombre</center></td>
-            <td><center>Cuil</center></td>
-            <td><center>Fecha Ingreso</center></td>
-            <td><center>Modificar</center></td>
-            <td><center>Eliminar</center></td>
+            <td><center><b>Legajo</b></center></td>
+            <td><center><b>Nombre</b></center></td>
+            <td><center><b>Cuil</b></center></td>
+            <td><center><b>Fecha Ingreso</b></center></td>
+            <td><center><b>Modificar</b></center></td>
+            <td><center><b>Eliminar</b></center></td>
 
 
              
@@ -35,6 +35,15 @@ Listados
     <tbody>
         
         {% if object_list %}
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>{{message}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+                               
+        {% endfor %}
+        {% endif %}
         {% for moz in object_list %}
         <tr>
             
@@ -65,7 +74,7 @@ Listados
 
 <br>
 <div class="volver">
-<a href="{% url 'admin'%}" style=><center>Volver</center></a>
+<a href="{% url 'admin'%}" style=><center>Menu</center></a>
 </div>
 
 

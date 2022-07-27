@@ -2,7 +2,9 @@ Django==3.2.2
 requests==2.25.1
 djangorestframework==3.12.4
 django-rest-auth==0.9.5
+# Filtros
 django-filter==22.1
+
 matplotlib==3.4.3
 # Para trabajar con imagenes
 Pillow==8.4.0

@@ -97,9 +97,9 @@ class Moza_o(models.Model):
 
     id = models.AutoField(db_column='ID',primary_key=True)
 
-    legajo = models.PositiveIntegerField(verbose_name='legajo', unique=True)
+    legajo = models.PositiveIntegerField(verbose_name='legajo', unique=True,default=0)
 
-    nombre = models.CharField(verbose_name='nombre', max_length=80, default='dd/mm/aaaa')
+    nombre = models.CharField(verbose_name='nombre', max_length=80, default='')
 
     fecha_ingreso = models.DateField(verbose_name='fecha_ingreso',default=datetime.date.today)
 
@@ -136,7 +136,7 @@ class Producto(models.Model):
 
     un_medida = models.ForeignKey(UnMedida, on_delete=CASCADE, default='')
 
-    medida_producto = models.DecimalField(verbose_name='medida_producto',max_digits=10, decimal_places=2,default=0)
+    medida_producto = models.DecimalField(verbose_name='medida_producto',max_digits=10, decimal_places=3,default=0)
 
     cantidad = models.DecimalField(verbose_name='cantidad',max_digits=10, decimal_places=2)
 
